@@ -76,7 +76,7 @@ const PerfonalInfo = () => {
   };
 
   const postDataToAPI = async (inputData) => {
-    const response = await fetch('https://eviasebackend.adaptable.app/', {
+    const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
