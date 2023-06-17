@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 const PerfonalInfo = () => {
   const location = useLocation();
   const [step, setStep] = useState(1);
+  const [errorMessage, setErrorMessage] = useState('');
   const [image, setImage] = useState(null);
   const [countrynationality, setCountrynationality] = useState ('');
   const [firstname, setFirstname] = useState('');
@@ -48,7 +49,7 @@ const PerfonalInfo = () => {
     event.preventDefault();
     // Check if input data is valid
     if (!image || !countrynationality || !firstname || !father || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialrorelative || !commercial || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
-      console.error('Please fill in all the fields');
+      setErrorMessage('Please fill in all the fields');
       return;
     }
 
@@ -76,7 +77,7 @@ const PerfonalInfo = () => {
   };
 
   const postDataToAPI = async (inputData) => {
-    const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
+    const response = await fetch('http://localhost:4000/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,17 +87,31 @@ const PerfonalInfo = () => {
     return response;
   };
 
-  function handleImageUpload (event) {
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
     reader.onload = () => {
-      console.log(reader.result);
-      setImage(reader.result);
+      const img = new Image();
+      img.onload = () => {
+        const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
+        if (fileSize < 5 || fileSize > 100) {
+          setErrorMessage('Image size must be between 5 and 100 KB.');
+          setImage(null);
+        // } else if (img.width !== 250 || img.height !== 250) {
+        //   setErrorMessage('Image dimensions must be 200x200 pixels.');
+        //   setImage(null);
+        } else {
+          setImage(reader.result);
+          setErrorMessage('');
+        }
+      };
+      img.src = reader.result;
     };
-    reader.onerror = error => {
-      console.log("Error: ", error);
-    };
+  
+    reader.readAsDataURL(file);
   };
+  
 
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
@@ -220,7 +235,30 @@ const PerfonalInfo = () => {
     setEmail(event.target.value);
   }
 
+
   const handleNext = () => {
+    // Check if input data is valid
+    if (
+      !image ||
+      !countrynationality ||
+      !firstname ||
+      !father ||
+      !lastname ||
+      !gender ||
+      !marital ||
+      !dbirth ||
+      !cbirth ||
+      !ctbirth ||
+      !profession ||
+      !country ||
+      !city ||
+      !zipcode ||
+      !address
+    ) {
+      setErrorMessage('Please fill in all the fields');
+      return;
+    }
+
     setStep(step + 1);
   };
 
@@ -289,12 +327,10 @@ const PerfonalInfo = () => {
                   must be from 5 to 100 Kb Allowed picture file types are .jpg,
                   .jpeg, .png, .gif, .bmp Photo Specifications
                 </p>
-
-                <div style={{width: "auto"}}>
-                  <input type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}/>
-                  {image==""|| image==null?"": <img width={100} height={100} src={image}/>}
+                <div style={{ width: 'auto' }}>
+                  <input type="file" accept="image/*" required onChange={handleImageUpload} />
+                  {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
+                  {image && <img className="pt-5" width={150} height={150} src={image} alt="Uploaded Image" />}
                 </div>
               </div>
               <div className="mt-10 ">
@@ -305,6 +341,7 @@ const PerfonalInfo = () => {
                 <select value={countrynationality}
                 onChange={handleCountrynationalityChange}
                 type="text"
+                required
                 className="border-[1px] border-gray-500 w-[90%] py-3 mt-5 ">
                   <option>Select</option>
                   <option value="Andorra">Andorra</option>
@@ -339,15 +376,17 @@ const PerfonalInfo = () => {
                   <option value="UnitedKingdom">United Kingdom</option>
                   <option value="UnitedStates">United States</option>
                 </select>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
               <div className="mt-10">
                 <label className="text-secondary font-medium ">
                   First Name or Given Name (English)*
-                </label>
+                </label> 
                 <br />
                 <input
                   type="text"
                   value={firstname}
+                  required
                   onChange={handleFirstnameChange}
                   placeholder="First Name or Given Name (English)"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
@@ -356,6 +395,7 @@ const PerfonalInfo = () => {
                   Please make sure to enter the names exactly mentioned on your
                   passport in English only
                 </p>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -383,6 +423,7 @@ const PerfonalInfo = () => {
                 <input
                   type="text"
                   value={lastname}
+                  required
                   onChange={handleLastnameChange}
                   placeholder="Last Name or Family Name (English)*"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
@@ -391,6 +432,7 @@ const PerfonalInfo = () => {
                   Please make sure to enter the names exactly mentioned on your
                   passport in English only
                 </p>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10 ">
@@ -399,12 +441,14 @@ const PerfonalInfo = () => {
                 <br />
                 <select value={gender} 
                 onChange={handleGenderChange}
-                type="text" 
+                type="text"
+                required 
                 className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
                   <option>Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10 ">
@@ -414,7 +458,8 @@ const PerfonalInfo = () => {
                 <br />
                 <select
                 type="text" 
-                value={marital} 
+                value={marital}
+                required 
                 onChange={handleMaritalChange} className="border-[1px] border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400">
                   <option>Select</option>
                   <option value="Single">Single</option>
@@ -423,6 +468,7 @@ const PerfonalInfo = () => {
                   <option value="Widow">Widow</option>
                   <option value="Other">Other</option>
                 </select>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
               <div className="mt-10">
                 <label className="text-secondary font-medium ">
@@ -432,6 +478,7 @@ const PerfonalInfo = () => {
                 <input
                   type="date"
                   value={dbirth}
+                  required
                   onChange={handleDbirthChange}
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
@@ -439,6 +486,7 @@ const PerfonalInfo = () => {
                   Click on the title of the popup window to scroll multiple
                   months/years at a time
                 </p>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -446,7 +494,11 @@ const PerfonalInfo = () => {
                   Country of Birth*
                 </label>
                 <br />
-                <select value={cbirth} onChange={handleCbirthChange} className="border-[1px] border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400">
+                <select 
+                  value={cbirth}
+                  required 
+                  onChange={handleCbirthChange} 
+                  className="border-[1px] border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400">
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -469,229 +521,225 @@ const PerfonalInfo = () => {
                   <option value="Belarus">Belarus</option>
                   <option value="Belgium">Belgium</option>
                   <option value="Belize">Belize</option>
-                  <option value="19">Benin</option>
-                  <option value="28">Bermuda</option>
-                  <option value="33">Bhutan</option>
-                  <option value="29">Bolivia</option>
-                  <option value="25">Bosnia</option>
-                  <option value="231">Botswana</option>
-                  <option value="34">Bouvet Island</option>
-                  <option value="30">Brazil</option>
-                  <option value="241">British Indian Ocean Territory</option>
-                  <option value="32">Brunei</option>
-                  <option value="22">Bulgaria</option>
-                  <option value="20">Burkina Faso</option>
-                  <option value="17">Burundi</option>
-                  <option value="106">Cambodia</option>
-                  <option value="42">Cameroon</option>
-                  <option value="36">Canada</option>
-                  <option value="47">Cape Verde</option>
-                  <option value="51">Cayman Island</option>
-                  <option value="35">Central African Republic</option>
-                  <option value="194">Chad</option>
-                  <option value="39">Chile</option>
-                  <option value="40">China</option>
-                  <option value="50">Christmas Island</option>
-                  <option value="37">Cocos Island</option>
-                  <option value="45">Colombia</option>
-                  <option value="46">Comoros</option>
-                  <option value="43">Congo</option>
-                  <option value="44">Cook Island</option>
-                  <option value="48">Costa Rica</option>
-                  <option value="41">Cote Divoire</option>
-                  <option value="90">Croatia</option>
-                  <option value="49">Cuba</option>
-                  <option value="52">Cyprus</option>
-                  <option value="53">Czech Republic</option>
-                  <option value="57">Denmark</option>
-                  <option value="55">Djibouti</option>
-                  <option value="56">Dominica</option>
-                  <option value="58">Dominican Republic</option>
-                  <option value="228">East Timor</option>
-                  <option value="60">Ecuador</option>
-                  <option value="61">Egypt</option>
-                  <option value="181">El Salvador</option>
-                  <option value="79">Equatorial  Guinea</option>
-                  <option value="224">Eritrea</option>
-                  <option value="63">Estonia</option>
-                  <option value="64">Ethiopia</option>
-                  <option value="67">Falkland Islands</option>
-                  <option value="69">Faroe Islands</option>
-                  <option value="66">Fiji</option>
-                  <option value="65">Finland</option>
-                  <option value="68">France</option>
-                  <option value="237">France, Metropolitan</option>
-                  <option value="84">French Guiana</option>
-                  <option value="167">French Polynesia</option>
-                  <option value="12">French Southern and Antarctic</option>
-                  <option value="70">Gabon</option>
-                  <option value="77">Gambia</option>
-                  <option value="72">Georgia</option>
-                  <option value="54">Germany</option>
-                  <option value="73">Ghana</option>
-                  <option value="74">Gibraltar</option>
-                  <option value="80">Greece</option>
-                  <option value="82">Greenland</option>
-                  <option value="81">Grenada</option>
-                  <option value="76">Guadeloupe</option>
-                  <option value="85">Guam</option>
-                  <option value="83">Guatemala</option>
-                  <option value="75">Guinea</option>
-                  <option value="78">Guinea-Bissau</option>
-                  <option value="86">Guyana</option>
-                  <option value="91">Haiti</option>
-                  <option value="88">Heard Island and McDonald Island</option>
-                  <option value="89">Honduras</option>
-                  <option value="1278">Hong Kong China</option>
-                  <option value="92">Hungary</option>
-                  <option value="98">Iceland</option>
-                  <option value="94">India</option>
-                  <option value="93">Indonesia</option>
-                  <option value="96">Iran</option>
-                  <option value="97">Iraq</option>
-                  <option value="95">Ireland</option>
-                  <option value="99">Italy</option>
-                  <option value="100">Jamaica</option>
-                  <option value="102">Japan</option>
-                  <option value="101">Jordan</option>
-                  <option value="103">Kazakhstan</option>
-                  <option value="104">Kenya</option>
-                  <option value="107">Kiribati</option>
-                  <option value="109">Korea , South</option>
-                  <option value="164">Korea, North</option>
-                  <option value="87">Kosovo</option>
-                  <option value="110">Kuwait</option>
-                  <option value="105">Kyrgyzstan</option>
-                  <option value="111">Laos</option>
-                  <option value="121">Latvia</option>
-                  <option value="112">Lebanon</option>
-                  <option value="118">Lesotho</option>
-                  <option value="113">Liberia</option>
-                  <option value="114">Libya</option>
-                  <option value="116">Liechtenstein</option>
-                  <option value="119">Lithuania</option>
-                  <option value="120">Luxembourg</option>
-                  <option value="122">Macau China</option>
-                  <option value="236">Macedonia, The Former Yugoslav Republic of</option>
-                  <option value="126">Madagascar</option>
-                  <option value="140">Malawi</option>
-                  <option value="141">Malaysia</option>
-                  <option value="127">Maldives</option>
-                  <option value="130">Mali</option>
-                  <option value="131">Malta</option>
-                  <option value="129">Marshall Island</option>
-                  <option value="230">Marshall Islands</option>
-                  <option value="138">Martinique</option>
-                  <option value="135">Mauritania</option>
-                  <option value="139">Mauritius</option>
-                  <option value="142">Mayotte</option>
-                  <option value="128">Mexico</option>
-                  <option value="229">Micronesia , Federated Stat</option>
-                  <option value="124">Monaco</option>
-                  <option value="133">Mongolia</option>
-                  <option value="243">Montenegro</option>
-                  <option value="137">Montserrat</option>
-                  <option value="123">Morocco</option>
-                  <option value="134">Mozambique</option>
-                  <option value="132">Myanmar</option>
-                  <option value="143">Namibia</option>
-                  <option value="153">Nauru</option>
-                  <option value="152">Nepal</option>
-                  <option value="150">Netherlands</option>
-                  <option value="238">Netherlands Antilles</option>
-                  <option value="144">New Caledonia</option>
-                  <option value="154">New Zealand</option>
-                  <option value="148">Nicaragua</option>
-                  <option value="145">Niger</option>
-                  <option value="147">Nigeria</option>
-                  <option value="149">Niue</option>
-                  <option value="146">Norfolk Island</option>
-                  <option value="227">Northern Mariana Islands</option>
-                  <option value="151">Norway</option>
-                  <option value="155">Oman</option>
-                  <option value="156">Pakistan</option>
-                  <option value="235">Palau</option>
-                  <option value="234">Palestinian Territory, Occupied</option>
-                  <option value="157">Panama</option>
-                  <option value="161">Papua New Guinea</option>
-                  <option value="166">Paraguay</option>
-                  <option value="159">Peru</option>
-                  <option value="160">Philippines</option>
-                  <option value="158">Pitcairn Islands</option>
-                  <option value="162">Poland</option>
-                  <option value="165">Portugal</option>
-                  <option value="163">Puerto Rico</option>
-                  <option value="168">Qatar</option>
-                  <option value="125">Republic of Moldova</option>
-                  <option value="136">Republic of South Sudan</option>
-                  <option value="169">Reunion</option>
-                  <option value="170">Romania</option>
-                  <option value="171">Russian Federation</option>
-                  <option value="172">Rwanda</option>
-                  <option value="233">Saint Helena</option>
-                  <option value="108">Saint Kitts and Nevis</option>
-                  <option value="115">Saint Lucia</option>
-                  <option value="184">Saint Pierre and Miquelon</option>
-                  <option value="212">Saint Vincent and  the Grenadines</option>
-                  <option value="226">Samoa</option>
-                  <option value="182">San Marino</option>
-                  <option value="185">Sao Tome And Principe</option>
-                  <option value="173">Saudi Arabia</option>
-                  <option value="175">Senegal</option>
-                  <option value="242">Serbia</option>
-                  <option value="223">Serbia and Montenegro</option>
-                  <option value="191">Seychelles</option>
-                  <option value="180">Sierra Leone</option>
-                  <option value="176">Singapore</option>
-                  <option value="187">Slovak Republic</option>
-                  <option value="188">Slovenia</option>
-                  <option value="179">Solomon Islands</option>
-                  <option value="183">Somalia</option>
-                  <option value="219">South Africa</option>
-                  <option value="177">South Georgia and The South</option>
-                  <option value="62">Spain</option>
-                  <option value="117">Sri Lanka</option>
-                  <option value="174">Sudan</option>
-                  <option value="186">Suriname</option>
-                  <option value="178">Svalbard</option>
-                  <option value="190">Swaziland</option>
-                  <option value="189">Sweden</option>
-                  <option value="38">Switzerland</option>
-                  <option value="192">Syrian</option>
-                  <option value="205">Taiwan China</option>
-                  <option value="197">Tajikistan</option>
-                  <option value="196">Thailand</option>
-                  <option value="195">Togo</option>
-                  <option value="198">Tokelau</option>
-                  <option value="200">Tonga</option>
-                  <option value="201">Trinidad and Tobago</option>
-                  <option value="202">Tunisia</option>
-                  <option value="203">Turkey</option>
-                  <option value="199">Turkmenistan</option>
-                  <option value="193">Turks and Caicos Islands</option>
-                  <option value="204">Tuvalu</option>
-                  <option value="207">Uganda</option>
-                  <option value="208">Ukraine</option>
-                  <option value="7">United Arab Emirates</option>
-                  <option value="71">United Kingdom</option>
-                  <option value="210">United States</option>
-                  <option value="239">United States Minor Outlying Islands</option>
-                  <option value="206">UR Tanzania</option>
-                  <option value="209">Uruguay</option>
-                  <option value="211">Uzbekistan</option>
-                  <option value="216">Vanuatu</option>
-                  <option value="240">Vatican City State</option>
-                  <option value="213">Venezuela</option>
-                  <option value="215">Vietnam</option>
-                  <option value="214">Virgin Islands</option>
-                  <option value="232">Virgin Islands(U.S.)</option>
-                  <option value="217">Wallis and Futuna</option>
-                  <option value="218">Yemen</option>
-                  <option value="225">Yugoslavia</option>
-                  <option value="220">Zaire</option>
-                  <option value="221">Zambia</option>
-                  <option value="222">Zimbabwe</option>
+                  <option value="Benin">Benin</option>
+                  <option value="Bermuda">Bermuda</option>
+                  <option value="Bhutan">Bhutan</option>
+                  <option value="Bolivia">Bolivia</option>
+                  <option value="Bosnia">Bosnia</option>
+                  <option value="Botswana">Botswana</option>
+                  <option value="Bouvet Island">Bouvet Island</option>
+                  <option value="Brazil">Brazil</option>
+                  <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                  <option value="Brunei">Brunei</option>
+                  <option value="Bulgaria">Bulgaria</option>
+                  <option value="Burkina Faso">Burkina Faso</option>
+                  <option value="Burundi">Burundi</option>
+                  <option value="Cambodia">Cambodia</option>
+                  <option value="Cameroon">Cameroon</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Cape Verde">Cape Verde</option>
+                  <option value="Cayman Island">Cayman Island</option>
+                  <option value="Central African Republic">Central African Republic</option>
+                  <option value="Chad">Chad</option>
+                  <option value="Chile">Chile</option>
+                  <option value="China">China</option>
+                  <option value="Christmas Island">Christmas Island</option>
+                  <option value="Cocos Island">Cocos Island</option>
+                  <option value="Colombia">Colombia</option>
+                  <option value="Comoros">Comoros</option>
+                  <option value="Congo">Congo</option>
+                  <option value="Cook Island">Cook Island</option>
+                  <option value="Costa Rica">Costa Rica</option>
+                  <option value="Cote Divoire">Cote Divoire</option>
+                  <option value="Croatia">Croatia</option>
+                  <option value="Cuba">Cuba</option>
+                  <option value="Cyprus">Cyprus</option>
+                  <option value="Czech Republic">Czech Republic</option>
+                  <option value="Denmark">Denmark</option>
+                  <option value="Djibouti">Djibouti</option>
+                  <option value="Dominica">Dominica</option>
+                  <option value="Dominican Republic">Dominican Republic</option>
+                  <option value="East Timor">East Timor</option>
+                  <option value="Ecuador">Ecuador</option>
+                  <option value="Egypt">Egypt</option>
+                  <option value="El Salvador">El Salvador</option>
+                  <option value="Equatorial Guinea">Equatorial Guinea</option>
+                  <option value="Eritrea">Eritrea</option>
+                  <option value="Estonia">Estonia</option>
+                  <option value="Ethiopia">Ethiopia</option>
+                  <option value="Falkland Islands">Falkland Islands</option>
+                  <option value="Faroe Islands">Faroe Islands</option>
+                  <option value="Fiji">Fiji</option>
+                  <option value="Finland">Finland</option>
+                  <option value="France">France</option>
+                  <option value="France, Metropolitan">France, Metropolitan</option>
+                  <option value="French Guiana">French Guiana</option>
+                  <option value="French Polynesia">French Polynesia</option>
+                  <option value="French Southern and Antarctic">French Southern and Antarctic</option>
+                  <option value="Gabon">Gabon</option>
+                  <option value="Gambia">Gambia</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Ghana">Ghana</option>
+                  <option value="Gibraltar">Gibraltar</option>
+                  <option value="Greece">Greece</option>
+                  <option value="Greenland">Greenland</option>
+                  <option value="Grenada">Grenada</option>
+                  <option value="Guadeloupe">Guadeloupe</option>
+                  <option value="Guam">Guam</option>
+                  <option value="Guatemala">Guatemala</option>
+                  <option value="Guinea">Guinea</option>
+                  <option value="Guinea-Bissau">Guinea-Bissau</option>
+                  <option value="Guyana">Guyana</option>
+                  <option value="Haiti">Haiti</option>
+                  <option value="Heard Island and McDonald Island">Heard Island and McDonald Island</option>
+                  <option value="Honduras">Honduras</option>
+                  <option value="Hong Kong China">Hong Kong China</option>
+                  <option value="Hungary">Hungary</option>
+                  <option value="Iceland">Iceland</option>
+                  <option value="India">India</option>
+                  <option value="Indonesia">Indonesia</option>
+                  <option value="Iran">Iran</option>
+                  <option value="Iraq">Iraq</option>
+                  <option value="Ireland">Ireland</option>
+                  <option value="Italy">Italy</option>
+                  <option value="Jamaica">Jamaica</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Jordan">Jordan</option>
+                  <option value="Kazakhstan">Kazakhstan</option>
+                  <option value="Kenya">Kenya</option>
+                  <option value="Kiribati">Kiribati</option>
+                  <option value="Korea, South">Korea, South</option>
+                  <option value="Korea, North">Korea, North</option>
+                  <option value="Kosovo">Kosovo</option>
+                  <option value="Kuwait">Kuwait</option>
+                  <option value="Kyrgyzstan">Kyrgyzstan</option>
+                  <option value="Laos">Laos</option>
+                  <option value="Latvia">Latvia</option>
+                  <option value="Lebanon">Lebanon</option>
+                  <option value="Lesotho">Lesotho</option>
+                  <option value="Liberia">Liberia</option>
+                  <option value="Libya">Libya</option>
+                  <option value="Liechtenstein">Liechtenstein</option>
+                  <option value="Lithuania">Lithuania</option>
+                  <option value="Luxembourg">Luxembourg</option>
+                  <option value="Macau China">Macau China</option>
+                  <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                  <option value="Madagascar">Madagascar</option>
+                  <option value="Malawi">Malawi</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="Maldives">Maldives</option>
+                  <option value="Mali">Mali</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Marshall Island">Marshall Island</option>
+                  <option value="Martinique">Martinique</option>
+                  <option value="Mauritania">Mauritania</option>
+                  <option value="Mauritius">Mauritius</option>
+                  <option value="Mayotte">Mayotte</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Micronesia">Micronesia</option>
+                  <option value="Moldova">Moldova</option>
+                  <option value="Monaco">Monaco</option>
+                  <option value="Mongolia">Mongolia</option>
+                  <option value="Montserrat">Montserrat</option>
+                  <option value="Morocco">Morocco</option>
+                  <option value="Mozambique">Mozambique</option>
+                  <option value="Myanmar">Myanmar</option>
+                  <option value="Namibia">Namibia</option>
+                  <option value="Nauru">Nauru</option>
+                  <option value="Nepal">Nepal</option>
+                  <option value="Netherlands">Netherlands</option>
+                  <option value="Netherlands Antilles">Netherlands Antilles</option>
+                  <option value="New Caledonia">New Caledonia</option>
+                  <option value="New Zealand">New Zealand</option>
+                  <option value="Nicaragua">Nicaragua</option>
+                  <option value="Niger">Niger</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Niue">Niue</option>
+                  <option value="Norfolk Island">Norfolk Island</option>
+                  <option value="Northern Mariana Island">Northern Mariana Island</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Oman">Oman</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Palau">Palau</option>
+                  <option value="Palestine">Palestine</option>
+                  <option value="Panama">Panama</option>
+                  <option value="Papua New Guinea">Papua New Guinea</option>
+                  <option value="Paraguay">Paraguay</option>
+                  <option value="Peru">Peru</option>
+                  <option value="Philippines">Philippines</option>
+                  <option value="Pitcairn Islands">Pitcairn Islands</option>
+                  <option value="Poland">Poland</option>
+                  <option value="Portugal">Portugal</option>
+                  <option value="Puerto Rico">Puerto Rico</option>
+                  <option value="Qatar">Qatar</option>
+                  <option value="Reunion">Reunion</option>
+                  <option value="Romania">Romania</option>
+                  <option value="Russia">Russia</option>
+                  <option value="Rwanda">Rwanda</option>
+                  <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                  <option value="Saint Lucia">Saint Lucia</option>
+                  <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                  <option value="Samoa">Samoa</option>
+                  <option value="San Marino">San Marino</option>
+                  <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                  <option value="Saudi Arabia">Saudi Arabia</option>
+                  <option value="Senegal">Senegal</option>
+                  <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+                  <option value="Seychelles">Seychelles</option>
+                  <option value="Sierra Leone">Sierra Leone</option>
+                  <option value="Singapore">Singapore</option>
+                  <option value="Slovakia">Slovakia</option>
+                  <option value="Slovenia">Slovenia</option>
+                  <option value="Solomon Island">Solomon Island</option>
+                  <option value="Somalia">Somalia</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="South Georgia and South Sandwich">South Georgia and South Sandwich</option>
+                  <option value="Spain">Spain</option>
+                  <option value="Sri Lanka">Sri Lanka</option>
+                  <option value="St. Helena">St. Helena</option>
+                  <option value="St. Pierre and Miquelon">St. Pierre and Miquelon</option>
+                  <option value="Sudan">Sudan</option>
+                  <option value="Suriname">Suriname</option>
+                  <option value="Svalbard and Jan Mayen Island">Svalbard and Jan Mayen Island</option>
+                  <option value="Swaziland">Swaziland</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Switzerland">Switzerland</option>
+                  <option value="Syria">Syria</option>
+                  <option value="Taiwan">Taiwan</option>
+                  <option value="Tajikistan">Tajikistan</option>
+                  <option value="Tanzania">Tanzania</option>
+                  <option value="Thailand">Thailand</option>
+                  <option value="Togo">Togo</option>
+                  <option value="Tokelau">Tokelau</option>
+                  <option value="Tonga">Tonga</option>
+                  <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                  <option value="Tunisia">Tunisia</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="Turkmenistan">Turkmenistan</option>
+                  <option value="Turks and Caicos Island">Turks and Caicos Island</option>
+                  <option value="Tuvalu">Tuvalu</option>
+                  <option value="Uganda">Uganda</option>
+                  <option value="Ukraine">Ukraine</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States">United States</option>
+                  <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                  <option value="Uruguay">Uruguay</option>
+                  <option value="Uzbekistan">Uzbekistan</option>
+                  <option value="Vanuatu">Vanuatu</option>
+                  <option value="Vatican City">Vatican City</option>
+                  <option value="Venezuela">Venezuela</option>
+                  <option value="Vietnam">Vietnam</option>
+                  <option value="Virgin Island, British">Virgin Island, British</option>
+                  <option value="Virgin Island, US">Virgin Island, US</option>
+                  <option value="Wallis and Futuna">Wallis and Futuna</option>
+                  <option value="Western Sahara">Western Sahara</option>
+                  <option value="Yemen">Yemen</option>
+                  <option value="Zambia">Zambia</option>
+                  <option value="Zimbabwe">Zimbabwe</option>
                 </select>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -702,10 +750,12 @@ const PerfonalInfo = () => {
                 <input
                   type="text"
                   value={ctbirth}
+                  required
                   onChange={handleCtbirthChange}
                   placeholder="City of Birth*"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -714,12 +764,14 @@ const PerfonalInfo = () => {
                 <input value={profession}
                 onChange={handleProfessionChange}
                   type="text"
+                  required
                   placeholder="Profession"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
                 <p className="text-[12px] mt-2 text-gray-400">
                   In case of minor please write "None"
                 </p>
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-20">
@@ -733,9 +785,11 @@ const PerfonalInfo = () => {
                 <br />
                 <input value={country} onChange={handleCountryChange}
                   type="text"
+                  required
                   placeholder="Country"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -744,10 +798,12 @@ const PerfonalInfo = () => {
                 <input
                   type="text"
                   value={city}
+                  required
                   onChange={handleCityChange}
                   placeholder="City"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -758,10 +814,12 @@ const PerfonalInfo = () => {
                 <input
                   type="text"
                   value={zipcode}
+                  required
                   onChange={handleZipcodeChange}
                   placeholder="Zip/Postal Code"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
 
               <div className="mt-10">
@@ -770,11 +828,15 @@ const PerfonalInfo = () => {
                 <input
                   type="text"
                   value={address}
+                  required
                   onChange={handleAddressChange}
                   placeholder="Address"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
+                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
               </div>
+              {/* Display error message */}
+              {errorMessage && <p>{errorMessage}</p>}
               <button variant="primary" onClick={handleNext}>
                 Next
               </button>
@@ -782,280 +844,285 @@ const PerfonalInfo = () => {
           )}
 
           {step === 2 && (
-          <div>
-          <div>
-            <p className=" text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
-            Application No.: 230328006206727
-            </p>
-
-            <div className="mt-10 ">
-              <label className="text-secondary font-medium ">
-                Passport Type*
-              </label>
-
-              <br />
-              <select 
-                value={passport} 
-                onChange={handlePassportChange} 
-                className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
-                <option>Select</option>
-                <option value="diplomatic">Diplomatic Passport</option>
-                <option value="regularrt">Regularrt</option>
-                <option value="special">Special Passport</option>
-              </select>
-            </div>
-
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">Passport No*</label>
-              <br />
-              <input
-                type="text"
-                value={passportno}
-                onChange={handlePassportnoChange}
-                placeholder="Passport No."
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">
-                Passport Issue Place (Country or City)*
-              </label>
-              <br />
-              <input
-                type="text"
-                value={passportissueplace}
-                onChange={handlePassportissueplaceChange}
-                placeholder="Passport Issue Place (Country or City)"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-
-            <div className="md:flex grid ">
-              <div className="mt-10">
-                <label className="text-secondary font-medium ">
-                  Passport Issue Date*
-                </label>
-                <br />
-                <input
-                  type="date"
-                  value={passportissuedate}
-                  onChange={handlePassportissuedateChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
-                />
-                <p className="text-[12px] mt-2 text-gray-400">
-                  Click on the title of the popup window to scroll multiple
-                  months/years at a time
-                </p>
-              </div>
-
-              <div className="mt-10">
-                <label className="text-secondary font-medium ">
-                  Passport Expiry Date*
-                </label>
-                <br />
-                <input
-                  type="date"
-                  value={passportexpirydate}
-                  onChange={handlePassportexpirydateChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
-                />
-                <p className="text-[12px] mt-2 text-gray-400">
-                  Passport must be valid at least 6 months from the Visa
-                  application submission date
-                </p>
-              </div>
-            </div>
-
-            <div className="md:flex grid ">
-              <div className="mt-10">
-                <label className="text-secondary font-medium ">
-                  Expected Date of Arrival*
-                </label>
-                <br />
-                <input
-                  type="date"
-                  value={arrivaldate}
-                  onChange={handleArrivaldateChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
-                />
-                <p className="text-[12px] mt-2 text-gray-400">
-                  Expected Date of Arrival should be chosen in the Visa validity
-                  (1 year), from the date of submission
-                </p>
-              </div>
-
-              <div className="mt-10">
-                <label className="text-secondary font-medium ">
-                  Expected Date of Departure*
-                </label>
-                <br />
-                <input
-                  type="date"
-                  value={departuredate}
-                  onChange={handleDeparturedateChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
-                />
-                <p className="text-[12px] mt-2 text-gray-400">
-                  The tourist visa is valid for 1 year starting from the issuance
-                  date and the period of stay is 90 days.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-14">
-              <p className="font-displace text-[23px]  md:text-[25px] font-medium">
-                Communication Preference *
+            <div>
+              <p className=" text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
+              Application No.: 230328006206727
               </p>
-            </div>
 
-            <div className="mt-10">
-              <input
-                type="text"
-                value={communication}
-                onChange={handleCommunicationChange}
-                placeholder="example@gmail.com*"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-            <div className="mt-10">
-              <input
-                type="number"
-                value={phoneno}
-                onChange={handlePhonenoChange}
-                placeholder="+332222222232"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
+              <div className="mt-10 ">
+                <label className="text-secondary font-medium ">
+                  Passport Type*
+                </label>
 
-            <div className="mt-20">
-              <p className=" text-[30px] font-displace">
-                Residence Address in Saudi Arabia
-              </p>
-            </div>
-
-            <div className="flex justify-between w-[80%] mt-10">
-              <div className="flex">
-                <input 
-                  value={residentialrorelative} 
-                  onChange={handleResidentialrorelativeChange} 
-                  type="text" 
-                  id="myCheckboxs" 
-                />
-                <p className="self-center ml-2 "> RESIDENTIAL OR RELATIVE</p>
+                <br />
+                <select 
+                  value={passport}
+                  required 
+                  onChange={handlePassportChange} 
+                  className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
+                  <option>Select</option>
+                  <option value="diplomatic">Diplomatic Passport</option>
+                  <option value="regularrt">Regularrt</option>
+                  <option value="special">Special Passport</option>
+                </select>
               </div>
 
-              <div className="flex">
-                <input 
-                  type="text" 
-                  id="myCheckboxs"
-                  value={commercial}
-                  onChange={handleCommmercialChange}
+              <div className="mt-10">
+                <label className="text-secondary font-medium ">Passport No*</label>
+                <br />
+                <input
+                  type="text"
+                  value={passportno}
+                  required
+                  onChange={handlePassportnoChange}
+                  placeholder="Passport No."
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
-                <p className="self-center ml-2"> COMMERCIAL ACCOMMODATION</p>
               </div>
-            </div>
 
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">
-                Name of Person*
-              </label>
-              <br />
-              <input
-                type="text"
-                value={nameofperson}
-                onChange={handleNameofpersonChange}
-                placeholder="Name of Person"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">City*</label>
-              <br />
-              <select
-                type="text"
-                value={scity}
-                onChange={handleScityChange}
-                placeholder="City"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              >
-                <option>Select</option>
-                <option value="Abha">Abha</option>
-                <option value="Afif">Afif</option>
-                <option value="AlGhat">Al Ghat</option>
-              </select>
-            </div>
-
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">Address 1*</label>
-              <br />
-              <input
-                type="text"
-                value={address1}
-                onChange={handleAddress1Change}
-                placeholder="Address 1"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-
-            <div className="mt-10">
-              <label className="text-secondary font-medium ">Address 2*</label>
-              <br />
-              <input
-                type="text"
-                value={address2}
-                onChange={handleAddress2Change}
-                placeholder="Address 2"
-                className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
-              />
-            </div>
-
-            <div className="md:flex  grid justify-between">
               <div className="mt-10">
                 <label className="text-secondary font-medium ">
-                  Primary Contact Number
+                  Passport Issue Place (Country or City)*
                 </label>
                 <br />
-                <div className="flex">
-                  <div className="border-2 border-gray-400 w-[20%] mt-3 p-3 text-[20px] text-gray-500">
-                    966
-                  </div>
+                <input
+                  type="text"
+                  value={passportissueplace}
+                  required
+                  onChange={handlePassportissueplaceChange}
+                  placeholder="Passport Issue Place (Country or City)"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                />
+              </div>
+
+              <div className="md:flex grid ">
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">
+                    Passport Issue Date*
+                  </label>
+                  <br />
                   <input
-                    type="number"
-                    value={primarynumber}
-                    onChange={handlePrimarynumberChange}
-                    placeholder="XXXXXXXXXXX"
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                    type="date"
+                    value={passportissuedate}
+                    required
+                    onChange={handlePassportissuedateChange}
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
                   />
+                  <p className="text-[12px] mt-2 text-gray-400">
+                    Click on the title of the popup window to scroll multiple
+                    months/years at a time
+                  </p>
+                </div>
+
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">
+                    Passport Expiry Date*
+                  </label>
+                  <br />
+                  <input
+                    type="date"
+                    value={passportexpirydate}
+                    required
+                    onChange={handlePassportexpirydateChange}
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                  />
+                  <p className="text-[12px] mt-2 text-gray-400">
+                    Passport must be valid at least 6 months from the Visa
+                    application submission date
+                  </p>
+                </div>
+              </div>
+
+              <div className="md:flex grid ">
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">
+                    Expected Date of Arrival*
+                  </label>
+                  <br />
+                  <input
+                    type="date"
+                    value={arrivaldate}
+                    required
+                    onChange={handleArrivaldateChange}
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                  />
+                  <p className="text-[12px] mt-2 text-gray-400">
+                    Expected Date of Arrival should be chosen in the Visa validity
+                    (1 year), from the date of submission
+                  </p>
+                </div>
+
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">
+                    Expected Date of Departure*
+                  </label>
+                  <br />
+                  <input
+                    type="date"
+                    value={departuredate}
+                    required
+                    onChange={handleDeparturedateChange}
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                  />
+                  <p className="text-[12px] mt-2 text-gray-400">
+                    The tourist visa is valid for 1 year starting from the issuance
+                    date and the period of stay is 90 days.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-14">
+                <p className="font-displace text-[23px]  md:text-[25px] font-medium">
+                  Communication Preference *
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <input
+                  type="text"
+                  value={communication}
+                  required
+                  onChange={handleCommunicationChange}
+                  placeholder="example@gmail.com*"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                />
+              </div>
+              <div className="mt-10">
+                <input
+                  type="number"
+                  value={phoneno}
+                  required
+                  onChange={handlePhonenoChange}
+                  placeholder="+332222222232"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                />
+              </div>
+
+              <div className="mt-20">
+                <p className=" text-[30px] font-displace">
+                  Residence Address in Saudi Arabia
+                </p>
+              </div>
+
+              <div className="flex justify-between w-[80%] mt-10">
+                <div className="flex">
+                  <input 
+                    value={residentialrorelative}
+                    required 
+                    onChange={handleResidentialrorelativeChange} 
+                    type="text" 
+                    id="myCheckboxs" 
+                  />
+                  <p className="self-center ml-2 "> RESIDENTIAL OR RELATIVE</p>
+                </div>
+
+                <div className="flex">
+                  <input 
+                    type="text" 
+                    id="myCheckboxs"
+                    value={commercial}
+                    required
+                    onChange={handleCommmercialChange}
+                  />
+                  <p className="self-center ml-2"> COMMERCIAL ACCOMMODATION</p>
                 </div>
               </div>
 
               <div className="mt-10">
-                <label className="text-secondary font-medium ">Email</label>
+                <label className="text-secondary font-medium ">
+                  Name of Person*
+                </label>
                 <br />
                 <input
-                  type="mail"
-                  value={email}
-                  onChange={handleEmailChange}
-                  placeholder="example@example.com"
+                  type="text"
+                  value={nameofperson}
+                  required
+                  onChange={handleNameofpersonChange}
+                  placeholder="Name of Person"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
                 />
               </div>
+
+              <div className="mt-10">
+                <label className="text-secondary font-medium ">City*</label>
+                <br />
+                <select
+                  type="text"
+                  value={scity}
+                  onChange={handleScityChange}
+                  required
+                  placeholder="City"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                >
+                  <option>Select</option>
+                  <option value="Abha">Abha</option>
+                  <option value="Afif">Afif</option>
+                  <option value="AlGhat">Al Ghat</option>
+                </select>
+              </div>
+
+              <div className="mt-10">
+                <label className="text-secondary font-medium ">Address 1*</label>
+                <br />
+                <input
+                  type="text"
+                  value={address1}
+                  required
+                  onChange={handleAddress1Change}
+                  placeholder="Address 1"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                />
+              </div>
+
+              <div className="mt-10">
+                <label className="text-secondary font-medium ">Address 2*</label>
+                <br />
+                <input
+                  type="text"
+                  value={address2}
+                  required
+                  onChange={handleAddress2Change}
+                  placeholder="Address 2"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                />
+              </div>
+
+              <div className="md:flex  grid justify-between">
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">
+                    Primary Contact Number
+                  </label>
+                  <br />
+                  <div className="flex">
+                    <div className="border-2 border-gray-400 w-[20%] mt-3 p-3 text-[20px] text-gray-500">
+                      966
+                    </div>
+                    <input
+                      type="number"
+                      value={primarynumber}
+                      required
+                      onChange={handlePrimarynumberChange}
+                      placeholder="XXXXXXXXXXX"
+                      className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-10">
+                  <label className="text-secondary font-medium ">Email</label>
+                  <br />
+                  <input
+                    type="mail"
+                    value={email}
+                    required
+                    onChange={handleEmailChange}
+                    placeholder="example@example.com"
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center my-20">
-            <button variant="primary" onClick={handlePrev}>
-              Previous
-            </button>{" "}
-            <button type="submit" variant="primary" value={handleSubmit}
-              className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        )}
+          )};
         </form>
       </div>
 
