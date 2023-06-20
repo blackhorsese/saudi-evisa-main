@@ -78,7 +78,7 @@ const PerfonalInfo = () => {
   };
 
   const postDataToAPI = async (inputData) => {
-    const response = await fetch('http://localhost:4000/user/add', {
+    const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1365,8 +1365,18 @@ const PerfonalInfo = () => {
                   />
                 </div>
               </div>
+              <div className="flex justify-center my-20">
+                <button variant="primary" onClick={handlePrev}>
+                    Previous
+                  </button>{" "}
+                  <button type="submit" variant="primary" value={handleSubmit}
+                    className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
+                  >
+                    Submit
+                </button>
+              </div>
             </div>
-          )};
+            )};
         </form>
       </div>
 
