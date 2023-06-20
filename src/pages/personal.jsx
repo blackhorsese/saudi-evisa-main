@@ -9,6 +9,7 @@ const PerfonalInfo = () => {
   const location = useLocation();
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
+  const [passportExpiryErrorMessage, setPassportExpiryErrorMessage] = useState('');
   const [image, setImage] = useState(null);
   const [countrynationality, setCountrynationality] = useState ('');
   const [firstname, setFirstname] = useState('');
@@ -98,9 +99,9 @@ const PerfonalInfo = () => {
         if (fileSize < 5 || fileSize > 100) {
           setErrorMessage('Image size must be between 5 and 100 KB.');
           setImage(null);
-        // } else if (img.width !== 250 || img.height !== 250) {
-        //   setErrorMessage('Image dimensions must be 200x200 pixels.');
-        //   setImage(null);
+        } else if (img.width !== 200 || img.height !== 200) {
+          setErrorMessage('Image dimensions must be 200x200 pixels.');
+          setImage(null);
         } else {
           setImage(reader.result);
           setErrorMessage('');
@@ -181,11 +182,21 @@ const PerfonalInfo = () => {
 
   const handlePassportissuedateChange = (event) => {
     setPassportissuedate(event.target.value);
-  }
+  };
+  
 
   const handlePassportexpirydateChange = (event) => {
     setPassportexpirydate(event.target.value);
-  }
+  
+    const currentDate = new Date();
+    const selectedDate = new Date(event.target.value);
+  
+    if (selectedDate < currentDate) {
+      setPassportExpiryErrorMessage('Passport has already expired');
+    } else {
+      setPassportExpiryErrorMessage('');
+    }
+  };
 
   const handleArrivaldateChange = (event) => {
     setArrivaldate(event.target.value);
@@ -311,13 +322,13 @@ const PerfonalInfo = () => {
       <Navbar color={location.pathname} />
       <div className="grid grid-cols-1  md:grid-cols-3">
         <div
-          className="md:block lg:block hidden -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
+          className="md:block lg:block hidden -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[20%] w-[90%] mx-auto "
           // style={{ overflowY: "scroll" }}
         >
           <Steppers />
         </div>
 
-        <form onSubmit={handleSubmit} className="md:col-span-2 md:ml-[300px] lg:ml-[400px] xl:ml-[500px] md:w-[80%] mx-auto w-[90%] ">
+        <form onSubmit={handleSubmit} className="md:col-span-2 md:ml-[300px] lg:ml-[400px] xl:ml-[500px] md:w-[75%] mx-auto w-[90%] ">
           {step === 1 && (
             <div>
               <div className="mt-20">
@@ -332,7 +343,7 @@ const PerfonalInfo = () => {
 
                   {image && <img className="pt-5" width={150} height={150} src={image} alt="Uploaded Image" />}
                 </div>
-                {errorMessage && <div className="error text-red-500">{errorMessage}</div>}
+                {errorMessage && <div className="error pt-4 text-red-500">{errorMessage}</div>}
               </div>
               <div className="mt-10 ">
                 <label className="text-secondary font-medium ">
@@ -343,7 +354,7 @@ const PerfonalInfo = () => {
                 onChange={handleCountrynationalityChange}
                 type="text"
                 required
-                className="border-[1px] border-gray-500 w-[90%] py-3 mt-5 ">
+                className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400">
                   <option>Select</option>
                   <option value="Andorra">Andorra</option>
                   <option value="Australia">Australia</option>
@@ -441,7 +452,7 @@ const PerfonalInfo = () => {
                 onChange={handleGenderChange}
                 type="text"
                 required 
-                className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
+                className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400">
                   <option>Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -494,6 +505,7 @@ const PerfonalInfo = () => {
                   required 
                   onChange={handleCbirthChange} 
                   className="border-[1px] border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400">
+                  <option>Select</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -780,6 +792,7 @@ const PerfonalInfo = () => {
                   required
                   placeholder="Country"
                   className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]">
+                  <option>Select</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
                   <option value="Algeria">Algeria</option>
@@ -1064,7 +1077,9 @@ const PerfonalInfo = () => {
               </div>
               {/* Display error message */}
               {errorMessage && <p>{errorMessage}</p>}
-              <button variant="primary" onClick={handleNext}>
+              <button 
+                className="text-secondary text-base border-4 border-secondary rounded-xl py-2 px-20 block self-end my-10" 
+                variant="primary" onClick={handleNext}>
                 Next
               </button>
             </div>
@@ -1148,6 +1163,7 @@ const PerfonalInfo = () => {
                   <br />
                   <input
                     type="date"
+                    id="passportexpirydate"
                     value={passportexpirydate}
                     required
                     onChange={handlePassportexpirydateChange}
@@ -1157,6 +1173,7 @@ const PerfonalInfo = () => {
                     Passport must be valid at least 6 months from the Visa
                     application submission date
                   </p>
+                  {passportExpiryErrorMessage && <p className="error text-red-500">{passportExpiryErrorMessage}</p>}
                 </div>
               </div>
 
