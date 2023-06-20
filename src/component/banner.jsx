@@ -13,9 +13,9 @@ export default function Banner({ color }) {
       <div className="bg ">
         <Navbar color={color} />
 
-        <div className=" grid grid-cols-1 ml-10 lg:ml-20  py-20 lg:py-40  hidden md:block">
+        <div className="grid grid-cols-1 ml-10 lg:ml-20 py-20 lg:py-40">
           <div>
-            <p className="text-[90px] 2/3 lg:w-1/2 font-medium font-displace text-white leading-[1]">
+            <p className="md:text-8xl text-4xl 2/3 lg:w-1/2 font-medium font-displace text-white leading-[1]">
               Welcome to the Saudi eVisa Portal
             </p>
 
@@ -58,12 +58,10 @@ export default function Banner({ color }) {
         <div>
           <button
             onClick={() => handleNavigate("/personal-info")}
-            className="hvr-bounce-to-top text-secondary text-[20px] border-4 border-secondary w-2/3 flex  md:w-4/5 p-4 rounded-full mx-auto block mt-10 xl:mt-0 "
+            className="items-center justify-center border-4 text-secondary border-secondary rounded-full md:px-20 px-10 md:py-4 md:font-bold py-2 mx-auto ml-8 mt-8 md:mt-0 md:ml-0"
           >
             APPLY NOW
           </button>
         </div>
       </div>
     </React.Fragment>
-  );
-}
