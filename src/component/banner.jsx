@@ -65,3 +65,5 @@ export default function Banner({ color }) {
         </div>
       </div>
     </React.Fragment>
+  );
+}
