@@ -65,7 +65,7 @@ const PerfonalInfo = () => {
         const confirmation = window.confirm("Are you sure you want to submit this form?");
         if (confirmation) {
           // Redirect to selected coin's page
-          window.location.href = '/review';
+          window.location.href = '/medical';
           // Generate and download PDF file
           generatePDF(inputData);
         }
