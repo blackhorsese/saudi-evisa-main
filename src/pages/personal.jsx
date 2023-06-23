@@ -1104,7 +1104,7 @@ const PerfonalInfo = () => {
                   className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
                   <option>Select</option>
                   <option value="diplomatic">Diplomatic Passport</option>
-                  <option value="regularrt">Regularrt</option>
+                  <option value="regularrt">Regulart</option>
                   <option value="special">Special Passport</option>
                 </select>
               </div>
@@ -1251,10 +1251,9 @@ const PerfonalInfo = () => {
               <div className="flex justify-between w-[80%] mt-10">
                 <div className="flex">
                   <input 
-                    value={residentialrorelative}
-                    required 
+                    checked={residentialrorelative}
                     onChange={handleResidentialrorelativeChange} 
-                    type="text" 
+                    type="checkbox" 
                     id="myCheckboxs" 
                   />
                   <p className="self-center ml-2 "> RESIDENTIAL OR RELATIVE</p>
@@ -1262,10 +1261,9 @@ const PerfonalInfo = () => {
 
                 <div className="flex">
                   <input 
-                    type="text" 
+                    type="checkbox" 
                     id="myCheckboxs"
-                    value={commercial}
-                    required
+                    checked={commercial}
                     onChange={handleCommmercialChange}
                   />
                   <p className="self-center ml-2"> COMMERCIAL ACCOMMODATION</p>
