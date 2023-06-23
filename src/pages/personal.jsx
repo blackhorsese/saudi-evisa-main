@@ -1372,7 +1372,7 @@ const PerfonalInfo = () => {
                   <button type="submit" variant="primary" value={handleSubmit}
                     className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
                   >
-                    Submit
+                    Next
                 </button>
               </div>
             </div>
