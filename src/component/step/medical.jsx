@@ -1,8 +1,8 @@
-import React from "react";
 import Navbar from "../navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer";
 import Steppers from "../stepper";
+import React, { useState } from "react";
 
 import Company from "../../asset/der3.png";
 import Company2 from "../../asset/walaa.png";
@@ -89,6 +89,7 @@ const companys = [
 ];
 
 function Medical() {
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const location = useLocation();
   let navigate = useNavigate();
   const handleNavigate = (link) => {
@@ -96,12 +97,16 @@ function Medical() {
   };
   // stepper
 
+  const handleCheckboxChange = (event) => {
+    setIsCheckboxChecked(event.target.checked);
+  };
+
   return (
     <>
       <Navbar color={location.pathname} />
       <div className="grid grid-cols-1  md:grid-cols-3 ">
         <div
-          className=" -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed  md:w-[25%] w-[90%] mx-auto "
+          className=" -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
           // style={{ height: "100vh", overflowY: "scroll" }}
         >
           <Steppers />
@@ -129,11 +134,15 @@ function Medical() {
           </div>
 
           <div className="flex mt-20">
-            <input type="checkbox" id="myCheckboxs" />
+            <input
+              required
+              type="checkbox"
+              id="myCheckboxs"
+              checked={isCheckboxChecked}
+              onChange={handleCheckboxChange}
+            />
             <p className="-mt-2 ml-2">
-              {" "}
-              BY CHECKING THIS BOX I AGREE TO THE INSURANCE COVERAGE LISTED
-              ABOVE WITH A FEE OF (180.00 SAR)
+              BY CHECKING THIS BOX I AGREE TO THE INSURANCE COVERAGE LISTED ABOVE WITH A FEE OF (180.00 SAR)
             </p>
           </div>
 
@@ -145,8 +154,13 @@ function Medical() {
               PREVIOUS
             </p>
             <button
-              onClick={() => handleNavigate("/termss")}
-              className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
+              onClick={() => {
+                if (isCheckboxChecked) {
+                  handleNavigate("/termss");
+                }
+              }}
+              disabled={!isCheckboxChecked}
+              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               NEXT
             </button>
