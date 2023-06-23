@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../footer";
@@ -11,6 +11,12 @@ function Termss() {
     navigate(link);
   };
   // stepper
+
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setIsCheckboxChecked(event.target.checked);
+  };
 
   return (
     <>
@@ -157,15 +163,18 @@ function Termss() {
               Mecca and Madina
             </li>
           </ul>
-
           <div className="flex mt-20">
-            <input type="checkbox" id="myCheckboxs" />
-            <p className=" ml-2 self-center">
-              {" "}
+            <input
+              required
+              type="checkbox"
+              id="myCheckboxs"
+              checked={isCheckboxChecked}
+              onChange={handleCheckboxChange}
+            />
+            <p className="ml-2 self-center">
               I HAVE READ AND AGREE ALL THE ABOVE TERMS AND CONDITIONS.
             </p>
           </div>
-
           <div className="flex justify-center my-20 ">
             <p
               onClick={() => handleNavigate("/medical")}
@@ -174,8 +183,15 @@ function Termss() {
               PREVIOUS
             </p>
             <button
-              onClick={() => handleNavigate("/review")}
-              className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
+              onClick={() => {
+                if (isCheckboxChecked) {
+                  handleNavigate("/review");
+                }
+              }}
+              disabled={!isCheckboxChecked}
+              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end ${
+                !isCheckboxChecked ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
               NEXT
             </button>
