@@ -141,7 +141,21 @@ const PerfonalInfo = () => {
   }
 
   const handleDbirthChange = (event) => {
-    setDbirth(event.target.value);
+    const enteredDbirth = event.target.value;
+    const today = new Date();
+    const enteredDate = new Date(enteredDbirth);
+    const ageDiff = today - enteredDate;
+    const ageDate = new Date(ageDiff);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+  
+    if (age >= 18) {
+      setDbirth(enteredDbirth);
+    } else {
+      // Display an error message or handle the error
+      alert('You must be at least 18 years old.');
+      // Optionally, you can clear the input field or perform other actions
+      // event.target.value = '';
+    }
   }
   const handleCbirthChange = (event) => {
     setCbirth(event.target.value);
