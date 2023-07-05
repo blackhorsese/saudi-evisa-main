@@ -112,6 +112,9 @@ const PerfonalInfo = () => {
       img.src = reader.result;
     };
   
+    reader.readAsDataURL(file);
+  };
+  
 
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
