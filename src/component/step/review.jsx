@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import Steppers from "../stepper";
+import { useNavigate } from "react-router-dom";
 
 
 const Personal = () => {
   const [inputData, setInputData] = useState(null);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  let navigate = useNavigate();
+  const handleNavigate = (link) => {
+    navigate(link);
+  };
 
   useEffect(() => {
     // Retrieve input data from local storage
@@ -14,6 +20,10 @@ const Personal = () => {
       setInputData(JSON.parse(data));
     }
   }, []);
+
+  const handleCheckboxChange = (event) => {
+    setIsCheckboxChecked(event.target.checked);
+  };
   
 
   if (!inputData) {
@@ -63,7 +73,7 @@ const Personal = () => {
                 <p className="text-[13px] text-secondary">
                   Father Name or Middle Name (English)
                 </p>
-                <p className="text-[20px]  mt-3">{inputData.father}</p>
+                <p className="text-[20px]  mt-3">{inputData.father}-</p>
               </div>
             </div>
 
@@ -295,7 +305,13 @@ const Personal = () => {
             </div>
           </div>
           <div className="flex mt-20">
-            <input type="checkbox" id="myCheckbox" />
+            <input
+              required
+              type="checkbox"
+              id="myCheckboxs"
+              checked={isCheckboxChecked}
+              onChange={handleCheckboxChange}
+            />
             <p className=" text-[11px] md:text-[15px] ml-2 self-center">
               {" "}
                 I have read and agree all the above terms and conditions.
@@ -305,13 +321,16 @@ const Personal = () => {
             <p className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center mr-10">
               Previous
             </p>
-            <a href="https://buy.stripe.com/14k3dX2Od3odawU4gm">
-              <p
-                className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center"
-              >
-                Payment
-              </p>
-            </a>
+            <button 
+              onClick={() => {
+                if (isCheckboxChecked) {
+                  handleNavigate("https://buy.stripe.com/14k3dX2Od3odawU4gm");
+                }
+              }}
+              disabled={!isCheckboxChecked}
+              className={`border-4 border-secondary px-10 py-2 rounded-full text-secondary text-[12px] md:text-[18px] cursor-pointer self-center mr-10 ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              Payment
+            </button>
           </div>
         </div>
       </div>
