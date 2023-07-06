@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import Steppers from "../stepper";
-import { useNavigate } from "react-router-dom";
 
 
-const Personal = () => {
+const Review = () => {
   const [inputData, setInputData] = useState(null);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-  let navigate = useNavigate();
-  const handleNavigate = (link) => {
-    navigate(link);
-  };
 
   useEffect(() => {
     // Retrieve input data from local storage
@@ -324,7 +319,7 @@ const Personal = () => {
             <button 
               onClick={() => {
                 if (isCheckboxChecked) {
-                  handleNavigate("https://buy.stripe.com/14k3dX2Od3odawU4gm");
+                  window.location.href = 'https://buy.stripe.com/14k3dX2Od3odawU4gm';
                 }
               }}
               disabled={!isCheckboxChecked}
@@ -340,4 +335,4 @@ const Personal = () => {
   );
 }
 
-export default Personal;
+export default Review;
