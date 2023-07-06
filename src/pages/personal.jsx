@@ -36,8 +36,7 @@ const PerfonalInfo = () => {
   const [departuredate, setDeparturedate] = useState ('');
   const [communication, setCommunication] = useState ('');
   const [phoneno, setPhoneno] = useState ('');
-  const [residentialrorelative, setResidentialrorelative] = useState ('');
-  const [commercial, setCommmercial] = useState ('');
+  const [residentialaddresssaudi, setResidentialaddresssaudi] = useState ('');
   const [nameofperson, setNameofperson] = useState ('');
   const [scity, setScity] = useState ('');
   const [address1, setAddress1] = useState ('');
@@ -49,13 +48,13 @@ const PerfonalInfo = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Check if input data is valid
-    if (!image || !countrynationality || !firstname || !father || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialrorelative || !commercial || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
+    if (!image || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
       setErrorMessage('Please fill in all the fields');
       return;
     }
 
     // Store input data in local storage
-    const inputData = { image, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialrorelative, commercial, nameofperson, scity, address1, address2, primarynumber, email };
+    const inputData = { image, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
     localStorage.setItem('inputData', JSON.stringify(inputData));
 
     try {
@@ -78,7 +77,7 @@ const PerfonalInfo = () => {
   };
 
   const postDataToAPI = async (inputData) => {
-    const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
+    const response = await fetch ('http://localhost:4000/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,21 +93,21 @@ const PerfonalInfo = () => {
   
     reader.onload = () => {
       const img = new Image();
-      img.onload = () => {
-        const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
-        // if (fileSize < 5 || fileSize > 100) {
-        //   setErrorMessage('Image size must be between 5 and 100 KB.');
-        //   setImage(null);
-        // } else if (img.width !== 200 || img.height !== 200) {
-        //   setErrorMessage('Image dimensions must be 200x200 pixels.');
-        //   setImage(null);
-        // } else {
-        //   setImage(reader.result);
-        //   setErrorMessage('');
-        // }
-        setImage(reader.result);
-        setErrorMessage('');
-      };
+      // img.onload = () => {
+      //   const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
+      //   if (fileSize < 5 || fileSize > 100) {
+      //     setErrorMessage('Image size must be between 5 and 100 KB.');
+      //     setImage(null);
+      //   } else if (img.width !== 200 || img.height !== 200) {
+      //     setErrorMessage('Image dimensions must be 200x200 pixels.');
+      //     setImage(null);
+      //   } else {
+      //     setImage(reader.result);
+      //     setErrorMessage('');
+      //   }
+      // };
+      setImage(reader.result);
+      setErrorMessage('');
       img.src = reader.result;
     };
   
@@ -157,7 +156,7 @@ const PerfonalInfo = () => {
       // event.target.value = '';
     }
   }
-  
+
   const handleCbirthChange = (event) => {
     setCbirth(event.target.value);
   }
@@ -231,12 +230,8 @@ const PerfonalInfo = () => {
     setPhoneno(event.target.value);
   }
 
-  const handleResidentialrorelativeChange = (event) => {
-    setResidentialrorelative(event.target.value);
-  }
-
-  const handleCommmercialChange = (event) => {
-    setCommmercial(event.target.value);
+  const handleResidentialaddresssaudiChange = (event) => {
+    setResidentialaddresssaudi(event.target.value);
   }
 
   const handleNameofpersonChange = (event) => {
@@ -270,7 +265,6 @@ const PerfonalInfo = () => {
       !image ||
       !countrynationality ||
       !firstname ||
-      !father ||
       !lastname ||
       !gender ||
       !marital ||
@@ -321,8 +315,7 @@ const PerfonalInfo = () => {
   //   doc.text(`Departuredate: ${inputData.departuredate}`, 10, 20);
   //   doc.text(`Communication: ${inputData.communication}`, 10, 20);
   //   doc.text(`Phone Number: ${inputData.phoneno}`, 10, 20);
-  //   doc.text(`Residential Rorelative: ${inputData.residentialrorelative}`, 10, 20);
-  //   doc.text(`Commercial: ${inputData.commercial}`, 10, 30);
+  //   doc.text(`Residential Rorelative: ${inputData.residentialaddresssaudi}`, 10, 20);
   //   doc.text(`Name of Person: ${inputData.nameofperson}`, 10, 30);
   //   doc.text(`Saudi City: ${inputData.scity}`, 10, 30);
   //   doc.text(`Saudi City Address 1: ${inputData.address1}`, 10, 30);
@@ -1105,14 +1098,13 @@ const PerfonalInfo = () => {
           {step === 2 && (
             <div>
               <p className=" text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
-              Application No.: 230328006206727
+                Application No.: 230328006206727
               </p>
 
               <div className="mt-10 ">
                 <label className="text-secondary font-medium ">
                   Passport Type*
                 </label>
-
                 <br />
                 <select 
                   value={passport}
@@ -1121,7 +1113,7 @@ const PerfonalInfo = () => {
                   className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
                   <option>Select</option>
                   <option value="diplomatic">Diplomatic Passport</option>
-                  <option value="regularrt">Regularrt</option>
+                  <option value="regular">Regular</option>
                   <option value="special">Special Passport</option>
                 </select>
               </div>
@@ -1259,32 +1251,20 @@ const PerfonalInfo = () => {
                 />
               </div>
 
-              <div className="mt-20">
-                <p className=" text-[30px] font-displace">
-                  Residence Address in Saudi Arabia
+              <div className="mt-10 ">
+                <p className="font-displace text-[23px] md:text-[25px] font-medium">
+                Residence Address in Saudi Arabia*
                 </p>
-              </div>
-
-              <div className="flex justify-between w-[80%] mt-10">
-                <div className="flex">
-                  <input 
-                    checked={residentialrorelative}
-                    onChange={handleResidentialrorelativeChange} 
-                    type="checkbox" 
-                    id="myCheckboxs" 
-                  />
-                  <p className="self-center ml-2 "> RESIDENTIAL OR RELATIVE</p>
-                </div>
-
-                <div className="flex">
-                  <input 
-                    type="checkbox" 
-                    id="myCheckboxs"
-                    checked={commercial}
-                    onChange={handleCommmercialChange}
-                  />
-                  <p className="self-center ml-2"> COMMERCIAL ACCOMMODATION</p>
-                </div>
+                <br />
+                <select 
+                  value={residentialaddresssaudi}
+                  required 
+                  onChange={handleResidentialaddresssaudiChange} 
+                  className="border-[1px]  border-gray-400 px-3 w-[100%] py-3 mt-3 placeholder-gray-400 ">
+                  <option>Select</option>
+                  <option value="residential">Residential or Relative</option>
+                  <option value="commercial">Commercial Accommodation</option> 
+                </select>
               </div>
 
               <div className="mt-10">
