@@ -3,14 +3,14 @@ import { useLocation,} from "react-router-dom";
 import Footer from "../component/footer";
 import Steppers from "../component/stepper";
 import React, { useState } from "react";
-// import jsPDF from 'jspdf';
+import jsPDF from 'jspdf';
 
 const PerfonalInfo = () => {
   const location = useLocation();
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
   const [passportExpiryErrorMessage, setPassportExpiryErrorMessage] = useState('');
-  const [image, setImage] = useState(null);
+  const [picture, setPicture] = useState(null);
   const [countrynationality, setCountrynationality] = useState ('');
   const [firstname, setFirstname] = useState('');
   const [father, setFather] = useState ('');
@@ -48,13 +48,13 @@ const PerfonalInfo = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Check if input data is valid
-    if (!image || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
+    if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
       setErrorMessage('Please fill in all the fields');
       return;
     }
 
     // Store input data in local storage
-    const inputData = { image, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
+    const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
     localStorage.setItem('inputData', JSON.stringify(inputData));
 
     try {
@@ -66,7 +66,7 @@ const PerfonalInfo = () => {
           // Redirect to selected coin's page
           window.location.href = '/medical';
           // Generate and download PDF file
-          // generatePDF(inputData);
+          generatePDF(inputData);
         }
       } else {
         console.error('Server responded with an error:', response.statusText);
@@ -77,7 +77,7 @@ const PerfonalInfo = () => {
   };
 
   const postDataToAPI = async (inputData) => {
-    const response = await fetch ('https://eviasebackend.adaptable.app/user/add', {
+    const response = await fetch ('http://localhost:4000/user/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -87,21 +87,21 @@ const PerfonalInfo = () => {
     return response;
   };
 
-  // const handleImageUpload = (event) => {
+  // const handlepictureUpload = (event) => {
   //   const file = event.target.files[0];
   //   const reader = new FileReader();
   //   reader.onload = () => {
-  //     const img = new Image();
+  //     const img = new picture();
   //     img.onload = () => {
   //       const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
   //       if (fileSize < 5 || fileSize > 100) {
-  //         setErrorMessage('Image size must be between 5 and 100 KB.');
-  //         setImage(null);
+  //         setErrorMessage('picture size must be between 5 and 100 KB.');
+  //         setpicture(null);
   //       } else if (img.width !== 200 || img.height !== 200) {
-  //         setErrorMessage('Image dimensions must be 200x200 pixels.');
-  //         setImage(null);
+  //         setErrorMessage('picture dimensions must be 200x200 pixels.');
+  //         setpicture(null);
   //       } else {
-  //         setImage(reader.result);
+  //         setpicture(reader.result);
   //         setErrorMessage('');
   //       }
   //     };
@@ -111,21 +111,17 @@ const PerfonalInfo = () => {
   //   reader.readAsDataURL(file);
   // };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-  
+  const handlePictureUpload = (event) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
     reader.onload = () => {
-      const img = new Image();
-      img.onload = () => {
-        setImage(reader.result);
-        setErrorMessage('');
+      console.log(reader.result);
+        setPicture(reader.result);
       };
-      img.src = reader.result;
-    };
-  
-    reader.readAsDataURL(file);
-  };
+      reader.onerror = error => {
+      console.log("error")
+    }
+  };  
   
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
@@ -274,7 +270,7 @@ const PerfonalInfo = () => {
   const handleNext = () => {
     // Check if input data is valid
     if (
-      !image ||
+      !picture ||
       !countrynationality ||
       !firstname ||
       !lastname ||
@@ -300,44 +296,44 @@ const PerfonalInfo = () => {
     setStep(step - 1);
   };
 
-  // const generatePDF = (inputData) => {
-  //   const doc = new jsPDF();
+  const generatePDF = (inputData) => {
+    const doc = new jsPDF();
   
-  //   // Add content to PDF file
-  //   doc.text(`Image: ${inputData.image}`, 10, 10);
-  //   doc.text(`Country Nationality: ${inputData.countrynationality}`, 10, 10);
-  //   doc.text(`First Name: ${inputData.firstname}`, 10, 10);
-  //   doc.text(`Father: ${inputData.father}`, 10, 20);
-  //   doc.text(`Last Name: ${inputData.lastname}`, 10, 20);
-  //   doc.text(`Gender: ${inputData.gender}`, 10, 20);
-  //   doc.text(`Marital: ${inputData.marital}`, 10, 20);
-  //   doc.text(`Date of Birth: ${inputData.dbirth}`, 10, 20);
-  //   doc.text(`Country of Birth: ${inputData.cbirth}`, 10, 20);
-  //   doc.text(`City of Birth: ${inputData.ctbirth}`, 10, 20);
-  //   doc.text(`Profession: ${inputData.profession}`, 10, 20);
-  //   doc.text(`Country: ${inputData.country}`, 10, 20);
-  //   doc.text(`City: ${inputData.city}`, 10, 20);
-  //   doc.text(`Zip Code: ${inputData.zipcode}`, 10, 20);
-  //   doc.text(`Address: ${inputData.address}`, 10, 20);
-  //   doc.text(`Passport: ${inputData.passport}`, 10, 20);
-  //   doc.text(`Passport Number: ${inputData.passportno}`, 10, 20);
-  //   doc.text(`Passprot Issue Place: ${inputData.passportissuedate}`, 10, 20);
-  //   doc.text(`Passport Expir Date: ${inputData.passportexpirydate}`, 10, 20);
-  //   doc.text(`Arrival Date: ${inputData.arrivaldate}`, 10, 20);
-  //   doc.text(`Departuredate: ${inputData.departuredate}`, 10, 20);
-  //   doc.text(`Communication: ${inputData.communication}`, 10, 20);
-  //   doc.text(`Phone Number: ${inputData.phoneno}`, 10, 20);
-  //   doc.text(`Residential Rorelative: ${inputData.residentialaddresssaudi}`, 10, 20);
-  //   doc.text(`Name of Person: ${inputData.nameofperson}`, 10, 30);
-  //   doc.text(`Saudi City: ${inputData.scity}`, 10, 30);
-  //   doc.text(`Saudi City Address 1: ${inputData.address1}`, 10, 30);
-  //   doc.text(`Saudi City Address 2: ${inputData.address2}`, 10, 30);
-  //   doc.text(`Primary Number: ${inputData.primarynumber}`, 10, 30);
-  //   doc.text(`Email: ${inputData.email}`, 10, 30);
+    // Add content to PDF file
+    doc.text(`picture: ${inputData.picture}`, 10, 10);
+    doc.text(`Country Nationality: ${inputData.countrynationality}`, 10, 10);
+    doc.text(`First Name: ${inputData.firstname}`, 10, 10);
+    doc.text(`Father: ${inputData.father}`, 10, 20);
+    doc.text(`Last Name: ${inputData.lastname}`, 10, 20);
+    doc.text(`Gender: ${inputData.gender}`, 10, 20);
+    doc.text(`Marital: ${inputData.marital}`, 10, 20);
+    doc.text(`Date of Birth: ${inputData.dbirth}`, 10, 20);
+    doc.text(`Country of Birth: ${inputData.cbirth}`, 10, 20);
+    doc.text(`City of Birth: ${inputData.ctbirth}`, 10, 20);
+    doc.text(`Profession: ${inputData.profession}`, 10, 20);
+    doc.text(`Country: ${inputData.country}`, 10, 20);
+    doc.text(`City: ${inputData.city}`, 10, 20);
+    doc.text(`Zip Code: ${inputData.zipcode}`, 10, 20);
+    doc.text(`Address: ${inputData.address}`, 10, 20);
+    doc.text(`Passport: ${inputData.passport}`, 10, 20);
+    doc.text(`Passport Number: ${inputData.passportno}`, 10, 20);
+    doc.text(`Passprot Issue Place: ${inputData.passportissuedate}`, 10, 20);
+    doc.text(`Passport Expir Date: ${inputData.passportexpirydate}`, 10, 20);
+    doc.text(`Arrival Date: ${inputData.arrivaldate}`, 10, 20);
+    doc.text(`Departuredate: ${inputData.departuredate}`, 10, 20);
+    doc.text(`Communication: ${inputData.communication}`, 10, 20);
+    doc.text(`Phone Number: ${inputData.phoneno}`, 10, 20);
+    doc.text(`Residential Rorelative: ${inputData.residentialaddresssaudi}`, 10, 20);
+    doc.text(`Name of Person: ${inputData.nameofperson}`, 10, 30);
+    doc.text(`Saudi City: ${inputData.scity}`, 10, 30);
+    doc.text(`Saudi City Address 1: ${inputData.address1}`, 10, 30);
+    doc.text(`Saudi City Address 2: ${inputData.address2}`, 10, 30);
+    doc.text(`Primary Number: ${inputData.primarynumber}`, 10, 30);
+    doc.text(`Email: ${inputData.email}`, 10, 30);
     
-  //   // Download PDF file
-  //   doc.save('form-data.pdf');
-  // };
+    // Download PDF file
+    doc.save('form-data.pdf');
+  };
 
   return (
     <>
@@ -356,16 +352,14 @@ const PerfonalInfo = () => {
               <div className="mt-20">
                 <p className=" text-[20px] font-semibold">Personal Picture</p>
                 <p className="text-gray-400 text-sm py-4 md:w-1/2 md:mt-5">
-                  Please upload image of dimension 200 x 200 px Personal Image Size
+                  Please upload picture of dimension 200 x 200 px Personal picture Size
                   must be from 5 to 100 Kb Allowed picture file types are .jpg,
                   .jpeg, .png, .gif, .bmp Photo Specifications
                 </p>
                 <div style={{ width: 'auto' }}>
-                  <input type="file" accept="image/*" required onChange={handleImageUpload} />
-
-                  {image && <img className="pt-5" width={150} height={150} src={image} alt="Uploaded Image" />}
+                  <input type="file" accept="picture/*" required onChange={handlePictureUpload} />
+                  {picture == "" || picture == null ? "": <img className="pt-5" width={150} height={150} src={picture}/>}
                 </div>
-                {errorMessage && <div className="error pt-4 text-red-500">{errorMessage}</div>}
               </div>
               <div className="mt-10 ">
                 <label className="text-secondary font-medium ">
