@@ -87,23 +87,39 @@ const PerfonalInfo = () => {
     return response;
   };
 
+  // const handleImageUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     const img = new Image();
+  //     img.onload = () => {
+  //       const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
+  //       if (fileSize < 5 || fileSize > 100) {
+  //         setErrorMessage('Image size must be between 5 and 100 KB.');
+  //         setImage(null);
+  //       } else if (img.width !== 200 || img.height !== 200) {
+  //         setErrorMessage('Image dimensions must be 200x200 pixels.');
+  //         setImage(null);
+  //       } else {
+  //         setImage(reader.result);
+  //         setErrorMessage('');
+  //       }
+  //     };
+  //     img.src = reader.result;
+  //   };
+  
+  //   reader.readAsDataURL(file);
+  // };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
+  
     reader.onload = () => {
       const img = new Image();
       img.onload = () => {
-        const fileSize = Math.round(reader.result.length / 1024); // Calculate file size in KB
-        if (fileSize < 5 || fileSize > 100) {
-          setErrorMessage('Image size must be between 5 and 100 KB.');
-          setImage(null);
-        } else if (img.width !== 200 || img.height !== 200) {
-          setErrorMessage('Image dimensions must be 200x200 pixels.');
-          setImage(null);
-        } else {
-          setImage(reader.result);
-          setErrorMessage('');
-        }
+        setImage(reader.result);
+        setErrorMessage('');
       };
       img.src = reader.result;
     };
