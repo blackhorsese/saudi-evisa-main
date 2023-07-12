@@ -104,9 +104,9 @@ function Medical() {
   return (
     <>
       <Navbar color={location.pathname} />
-      <div className="grid grid-cols-1  md:grid-cols-3 ">
+      <div className="grid grid-cols-1 md:grid-cols-3">
         <div
-          className="hidden lg:block md:block -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
+          className="hidden md:block lg:block -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
           // style={{ height: "100vh", overflowY: "scroll" }}
         >
           <Steppers />
@@ -117,16 +117,16 @@ function Medical() {
             Application No.: 230328006206727
           </p>
 
-          <p className="font-medium text-[18px] mt-3">
-            Medical insurance covers only emergency cases All of the companies
+          <p className="font-medium md:text-base text-sm mt-3">
+            Medical insurance covers only emergency cases All of the companie
             are approved and certified in Saudi Arabia
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-1 md:grid-cols-3 gap-5">
             {companys.map((x) => (
               <div className="shadow-xl p-4">
                 <img src={x.img} />
-                <p className="font-medium text-[18px] my-3 text-center ">
+                <p className="font-medium md:text-base text-sm my-3 text-center ">
                   {x.text}
                 </p>
               </div>
@@ -141,7 +141,8 @@ function Medical() {
               checked={isCheckboxChecked}
               onChange={handleCheckboxChange}
             />
-            <p className="-mt-2 ml-2">
+            <p className=" text-[12px] md:text-[15px] ml-2 self-center">
+              {" "}
               BY CHECKING THIS BOX I AGREE TO THE INSURANCE COVERAGE LISTED ABOVE WITH A FEE OF (180.00 SAR)
             </p>
           </div>
@@ -160,7 +161,7 @@ function Medical() {
                 }
               }}
               disabled={!isCheckboxChecked}
-              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full block h-[60px]  self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               NEXT
             </button>
