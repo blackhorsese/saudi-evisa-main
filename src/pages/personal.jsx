@@ -1324,14 +1324,11 @@ const handleSubmit = async (event) => {
                 </div>
               </div>
               <div className="flex justify-center my-20">
-                <button variant="primary" onClick={handlePrev}>
-                    Previous
-                  </button>{" "}
                   <button type="submit" variant="primary" value={handleSubmit}
                     className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
                   >
                     Next
-                </button>
+                  </button>
               </div>
             </div>
             )};
