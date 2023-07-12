@@ -63,7 +63,7 @@ const handleSubmit = async (event) => {
         const confirmation = window.confirm("Are you sure you want to submit this form?");
         if (confirmation) {
           // Redirect to selected coin's page
-          window.location.href = '/medical';
+          window.location.href = 'https://saudi-evisa-main.vercel.app/medical';
         }
       } else {
         console.error('Server responded with an error:', response.statusText);
