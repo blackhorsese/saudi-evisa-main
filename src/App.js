@@ -23,13 +23,13 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/formdata" element={<Formdata />} />
           <Route path="/privact-policy" element={<Policy />} />
-          <Route path="/terms" element={<Terms />} />
+          <Route path="/termss" element={<Terms />} />
           <Route path="/info" element={<Info />} />
           <Route path="/visa" element={<Visa />} />
           <Route path="/personal-info" element={<PerfonalInfo />} />
           <Route path="/passport" element={<Passport />} />
           <Route path="/medical" element={<Medical />} />
-          <Route path="/termss" element={<Termss />} />
+          <Route path="/terms" element={<Termss />} />
           <Route path="/review" element={<Review />} />
           <Route path="/method" element={<Method />} />
         </Routes>
