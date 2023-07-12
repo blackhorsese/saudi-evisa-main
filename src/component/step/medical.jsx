@@ -106,7 +106,7 @@ function Medical() {
       <Navbar color={location.pathname} />
       <div className="grid grid-cols-1  md:grid-cols-3 ">
         <div
-          className=" -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
+          className="hidden lg:block md:block -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed md:w-[25%] w-[90%] mx-auto "
           // style={{ height: "100vh", overflowY: "scroll" }}
         >
           <Steppers />
