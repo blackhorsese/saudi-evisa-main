@@ -44,45 +44,45 @@ const PerfonalInfo = () => {
   const [email, setEmail] = useState ('');
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Check if input data is valid
-    if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
-      setErrorMessage('Please fill in all the fields');
-      return;
-    }
-
-    // Store input data in local storage
-    const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
-    localStorage.setItem('inputData', JSON.stringify(inputData));
-
-    try {
-      // Send POST request to API
-      const response = await postDataToAPI(inputData);
-      if (response.ok) {
-        const confirmation = window.confirm("Are you sure you want to submit this form?");
-        if (confirmation) {
-          // Redirect to selected coin's page
-          window.location.href = '/medical';
-        }
-      } else {
-        console.error('Server responded with an error:', response.statusText);
+const handleSubmit = async (inputData) => {
+  try {
+    const response = await postDataToAPI(inputData);
+    if (response.ok) {
+      const confirmation = window.confirm("Are you sure you want to submit this form?");
+      if (confirmation) {
+        redirectToPage('/medical');
       }
-    } catch (error) {
-      console.error(error);
+    } else {
+      console.error('Server responded with an error:', response.statusText);
     }
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  const postDataToAPI = async (inputData) => {
-    const response = await fetch ('https://eviasebackend.adaptable.app/user/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(inputData),
-    });
-    return response;
-  };
+const postDataToAPI = async (inputData) => {
+  const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(inputData),
+  });
+  return response;
+};
+
+const redirectToPage = (url) => {
+  // Check if the browser is running on an Android device
+  const isAndroid = /android/i.test(navigator.userAgent);
+
+  if (isAndroid) {
+    // Open the URL in a new tab/window
+    window.open(url, '_blank');
+  } else {
+    // Redirect to the URL
+    window.location.href = url;
+  }
+};
 
   // const handlepictureUpload = (event) => {
   //   const file = event.target.files[0];
