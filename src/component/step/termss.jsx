@@ -21,21 +21,21 @@ function Termss() {
   return (
     <>
       <Navbar color={location.pathname} />
-      <div className="grid grid-cols-1  md:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 px-5 justify-start mx-auto">
         <div
-          className="hidden lg:block md:block -z-30 md:col-span-1 bg-side md:h-[100vh] mt-10 md:-mt-[165px] md:fixed  md:w-[25%] w-[90%] mx-auto "
+          className="hidden lg:block md:block -z-30 md:col-span-1 bg-side md:h-[100vh] md:text-lg text-base mt-8 md:-mt-[165px] md:fixed  md:w-[25%] w-[90%] mx-auto "
           // style={{ height: "100vh", overflowY: "scroll" }}
         >
           <Steppers />
         </div>
 
-        <div className="mt-10 md:mt-0  md:col-span-2 md:ml-[300px]  lg:ml-[400px] xl:ml-[500px] md:w-[80%] mx-auto  w-[90%] ">
+        <div className="md:text-lg text-base mt-8 md:mt-0  md:col-span-2 md:ml-[300px] lg:ml-[400px] xl:ml-[500px] md:w-[80%] mx-auto w-[90%] ">
           <p className=" text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
             Application No.: 230328006206727
           </p>
 
           <ul style={{ listStyle: "initial" }}>
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I acknowledge that all the information I provided are true and
               reliable. In addition, I pledge to abide to the laws and rules of
               the Kingdom of Saudi Arabia and respect the customs and Islamic
@@ -46,14 +46,14 @@ function Termss() {
               or if the information under which I received my visa are proven to
               be incorrect.
             </li>
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I am fully aware that all intoxicating substances, narcotic drugs,
               indecent materials and publications, as well as publications
               related to any religious beliefs or political tendencies that
               contradict with Islam are prohibited in the Kingdom of Saudi
               Arabia.
             </li>
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I am fully aware of the procedures and controls regarding the
               batch-release and clearance of medicines, containing narcotic or
               psychotropic substances that are possessed for personal use by
@@ -66,12 +66,12 @@ function Termss() {
               Substances.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I have never been deported from The Kingdom of Saudi Arabia or any
               other GCC country, nor that I have violated their rules.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I have never been deported from The Kingdom of Saudi Arabia or any
               other GCC country, nor that I have violated their rules. I pledge
               to Abide to the type of visa I was provided and to its terms and
@@ -88,7 +88,7 @@ function Termss() {
               Ministers resolution No (140) on 6/5/1434 H.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I acknowledge the right of the Saudi authorities to repatriate me
               from the port of entry at my own expense or deport the Saudi
               territory after entering it. I acknowledge the right of the Saudi
@@ -102,12 +102,12 @@ function Termss() {
               documents that do not match the truth.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I acknowledge that drug dealing or smuggling drugs into the
               Kingdom is a crime punishable by death penalty.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I acknowledge and pledge again that all written information shall
               be correct and exactly as it is written in my passport that will
               be used in my travel and entrance to the Kingdom of Saudi Arabia;
@@ -120,45 +120,45 @@ function Termss() {
               compensation.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I understand that I am not permitted to use the tourist visa for
               any purpose other than tourism, and that I should not practice any
               paid or non-paid work related activity, nor perform Hajj during my
               stay in Saudi Arabia
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               Laws and etiquettes in Saudi Arabia, Read More ...
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I acknowledge that there are no medical treatment purposes behind
               the visit.
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               To my knowledge, I have not engaged in physical contact with a
               member of the public affected by the coronavirus (2019-nCoV)
             </li>
 
-            <li className="mt-10">Visa application fees are nonrefundable</li>
+            <li className="md:text-lg text-base mt-8">Visa application fees are nonrefundable</li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               I have read and agree to Privacy Policy, Terms and Conditions
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               The duration of stay is 90 days upon entry in Saudi within the
               validity of the eVisa which is one year
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               Once the 90 days has been consumed, there will be no extension nor
               renewal of the eVisa until the expiry of the validity of the eVisa
               (one year)
             </li>
 
-            <li className="mt-10">
+            <li className="md:text-lg text-base mt-8">
               It’s prohibited for non-Muslims to access the two holy sites of
               Mecca and Madina
             </li>
@@ -171,14 +171,14 @@ function Termss() {
               checked={isCheckboxChecked}
               onChange={handleCheckboxChange}
             />
-            <p className="ml-2 self-center">
-              I HAVE READ AND AGREE ALL THE ABOVE TERMS AND CONDITIONS.
+            <p className="ml-2 self-center md:text-lg text-base">
+              I have read and agree all the above terms and conditions.
             </p>
           </div>
-          <div className="flex justify-center my-20 ">
+          <div className="flex justify-center my-16 md:my-20 md:gap-16">
             <p
               onClick={() => handleNavigate("/medical")}
-              className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center"
+              className="cool-link text-black md:text-lg text-sm cursor-pointer self-center"
             >
               PREVIOUS
             </p>
@@ -189,7 +189,7 @@ function Termss() {
                 }
               }}
               disabled={!isCheckboxChecked}
-              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end ${
+              className={`ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end ${
                 !isCheckboxChecked ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
