@@ -51,24 +51,24 @@ const Review = () => {
           <p className="text-secondary text-[12px] mt-10">Application Type</p>
           <p className="text-gray-500 text-[20px] mt-5">Individual</p>
 
-          <p className="font-displace font-medium text-[30px] mt-20">
+          <p className="font-displace font-medium text-[30px] mt-10">
             Basic Information
           </p>
           <div>
-            <img width={100} height={100} src={inputData.picture} alt="Base64 Image"/>
+            <img className="mt-5 w-40" src={inputData.picture} alt="Image"/>
             
             <div className="grid grid-cols-2 bg-gray-100 p-5 mt-10">
               <div>
                 <p className="text-[13px] text-secondary">
                   First Name or Given Name (English)
                 </p>
-                <p className="text-[20px] mt-3">{inputData.firstname}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.firstname}</p>
               </div>
               <div>
                 <p className="text-[13px] text-secondary">
                   Father Name or Middle Name (English)
                 </p>
-                <p className="text-[20px]  mt-3">{inputData.father}-</p>
+                <p className="md:text-lg text-base mt-2">{inputData.father}-</p>
               </div>
             </div>
 
@@ -77,43 +77,43 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Last Name or Family Name (English)
                 </p>
-                <p className="text-[20px] mt-3">{inputData.lastname}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.lastname}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 bg-gray-100 p-5">
               <div>
                 <p className="text-[13px] text-secondary">Gender</p>
-                <p className="text-[20px] mt-3">{inputData.gender}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.gender}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">Marital Status</p>
-                <p className="text-[20px]  mt-3">{inputData.marital}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.marital}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 p-5">
               <div>
                 <p className="text-[13px] text-secondary">Profession</p>
-                <p className="text-[20px] mt-3">{inputData.profession}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.profession}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">Date of Birth</p>
-                <p className="text-[20px]  mt-3">{inputData.dbirth}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.dbirth}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 bg-gray-100 p-5">
               <div>
                 <p className="text-[13px] text-secondary">Country of Birth</p>
-                <p className="text-[20px] mt-3">{inputData.cbirth}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.cbirth}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">City of Birth</p>
-                <p className="text-[20px]  mt-3">{inputData.ctbirth}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.ctbirth}</p>
               </div>
             </div>
 
@@ -122,7 +122,7 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Country of Nationality
                 </p>
-                <p className="text-[20px] mt-3">{inputData.countrynationality}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.countrynationality}</p>
               </div>
             </div>
           </div>
@@ -133,42 +133,42 @@ const Review = () => {
             <div className="grid grid-cols-2 bg-gray-100 p-5 mt-10">
               <div>
                 <p className="text-[13px] text-secondary">Country</p>
-                <p className="text-[20px] mt-3">{inputData.country}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.country}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">City</p>
-                <p className="text-[20px]  mt-3">{inputData.city}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.city}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2  p-5 ">
               <div>
                 <p className="text-[13px] text-secondary">Zip/Postal Code</p>
-                <p className="text-[20px] mt-3">{inputData.zipcode}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.zipcode}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">Address</p>
-                <p className="text-[20px]  mt-3">{inputData.address}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.address}</p>
               </div>
             </div>
           </div>
 
           <div>
-            <p className=" text-[25px] mt-14">
+            <p className=" text-[25px] mt-10">
               Passport Information / Travel Details
             </p>
 
             <div className="grid grid-cols-2 bg-gray-100 p-5 mt-10">
               <div>
                 <p className="text-[13px] text-secondary">Passport Type</p>
-                <p className="text-[20px] mt-3">{inputData.passport}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.passport}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">Passport No.</p>
-                <p className="text-[20px]  mt-3">{inputData.passportno}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.passportno}</p>
               </div>
             </div>
 
@@ -177,7 +177,7 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Passport Issue Place (Country or City)
                 </p>
-                <p className="text-[20px] mt-3">{inputData.passportissueplace}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.passportissueplace}</p>
               </div>
             </div>
 
@@ -186,12 +186,12 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Passport Issue Date
                 </p>
-                <p className="text-[20px] mt-3">{inputData.passportissuedate}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.passportissuedate}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">Passport No.</p>
-                <p className="text-[20px]  mt-3">{inputData.passportno}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.passportno}</p>
               </div>
             </div>
 
@@ -200,14 +200,14 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Expected Date of Arrival
                 </p>
-                <p className="text-[20px] mt-3">{inputData.arrivaldate}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.arrivaldate}</p>
               </div>
 
               <div>
                 <p className="text-[13px] text-secondary">
                   Expected Date of Departure
                 </p>
-                <p className="text-[20px]  mt-3">{inputData.departuredate}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.departuredate}</p>
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@ const Review = () => {
                   Do you want to receive the visa on a email other than your
                   original email?
                 </p>
-                <p className="text-[20px] mt-3">{inputData.communication}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.communication}</p>
               </div>
             </div>
 
@@ -243,7 +243,7 @@ const Review = () => {
                   Do you want to receive the visa on a phone number other than
                   your original phone number?
                 </p>
-                <p className="text-[20px] mt-3">{inputData.phoneno}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.phoneno}</p>
               </div>
             </div>
           </div>
@@ -256,21 +256,21 @@ const Review = () => {
             <div className="grid grid-cols-1 bg-gray-100 p-5 mt-10">
               <div>
                 <p className="text-[13px] text-secondary">City</p>
-                <p className="text-[20px] mt-3">{inputData.scity}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.scity}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 p-5">
               <div>
                 <p className="text-[13px] text-secondary">Address 1</p>
-                <p className="text-[20px] mt-3">{inputData.address1}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.address1}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 bg-gray-100 p-5 mt-10">
               <div>
                 <p className="text-[13px] text-secondary">Address 2</p>
-                <p className="text-[20px] mt-3">{inputData.address2}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.address2}</p>
               </div>
             </div>
 
@@ -279,7 +279,7 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Name of Person or Hotel
                 </p>
-                <p className="text-[20px] mt-3">{inputData.nameofperson}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.nameofperson}</p>
               </div>
             </div>
 
@@ -288,14 +288,14 @@ const Review = () => {
                 <p className="text-[13px] text-secondary">
                   Primary Contact Number
                 </p>
-                <p className="text-[20px] mt-3">{inputData.primarynumber}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.primarynumber}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 p-5">
               <div>
                 <p className="text-[13px] text-secondary">Email</p>
-                <p className="text-[20px] mt-3">{inputData.email}</p>
+                <p className="md:text-lg text-base mt-2">{inputData.email}</p>
               </div>
             </div>
           </div>
@@ -307,23 +307,23 @@ const Review = () => {
               checked={isCheckboxChecked}
               onChange={handleCheckboxChange}
             />
-            <p className=" text-[11px] md:text-[15px] ml-2 self-center">
+            <p className="ml-2 self-center md:text-lg text-base">
               {" "}
                 I have read and agree all the above terms and conditions.
             </p>
           </div>
-          <div className="flex justify-center my-20 ">
-            <p className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center mr-10">
+          <div className="flex justify-center my-16">
+            <p className="cool-link  text-black md:text-lg text-base cursor-pointer self-center mr-10">
               Previous
             </p>
             <button 
               onClick={() => {
                 if (isCheckboxChecked) {
-                  window.location.href = 'https://buy.stripe.com/4gw7ud3ShcYN20obIQ';
+                  window.location.href = 'https://buy.stripe.com/14k3dX2Od3odawU4gm';
                 }
               }}
               disabled={!isCheckboxChecked}
-              className={`border-4 border-secondary px-10 py-2 rounded-full text-secondary text-[12px] md:text-[18px] cursor-pointer self-center mr-10 ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              className={`border-4 border-secondary px-10 py-2 rounded-full text-secondary md:text-lg text-base cursor-pointer self-center mr-10 ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}>
               Payment
             </button>
           </div>
