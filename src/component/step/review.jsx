@@ -55,7 +55,7 @@ const Review = () => {
             Basic Information
           </p>
           <div>
-            <img width={100} height={100} src={inputData.image} alt="Base64 Image"/>
+            <img width={100} height={100} src={inputData.picture} alt="Base64 Image"/>
             
             <div className="grid grid-cols-2 bg-gray-100 p-5 mt-10">
               <div>
