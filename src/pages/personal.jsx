@@ -3,7 +3,6 @@ import { useLocation,} from "react-router-dom";
 import Footer from "../component/footer";
 import Steppers from "../component/stepper";
 import React, { useState } from "react";
-import jsPDF from 'jspdf';
 
 const PerfonalInfo = () => {
   const location = useLocation();
@@ -65,8 +64,6 @@ const PerfonalInfo = () => {
         if (confirmation) {
           // Redirect to selected coin's page
           window.location.href = '/medical';
-          // Generate and download PDF file
-          generatePDF(inputData);
         }
       } else {
         console.error('Server responded with an error:', response.statusText);
@@ -294,45 +291,6 @@ const PerfonalInfo = () => {
 
   const handlePrev = () => {
     setStep(step - 1);
-  };
-
-  const generatePDF = (inputData) => {
-    const doc = new jsPDF();
-  
-    // Add content to PDF file
-    doc.text(`picture: ${inputData.picture}`, 10, 10);
-    doc.text(`Country Nationality: ${inputData.countrynationality}`, 10, 10);
-    doc.text(`First Name: ${inputData.firstname}`, 10, 10);
-    doc.text(`Father: ${inputData.father}`, 10, 20);
-    doc.text(`Last Name: ${inputData.lastname}`, 10, 20);
-    doc.text(`Gender: ${inputData.gender}`, 10, 20);
-    doc.text(`Marital: ${inputData.marital}`, 10, 20);
-    doc.text(`Date of Birth: ${inputData.dbirth}`, 10, 20);
-    doc.text(`Country of Birth: ${inputData.cbirth}`, 10, 20);
-    doc.text(`City of Birth: ${inputData.ctbirth}`, 10, 20);
-    doc.text(`Profession: ${inputData.profession}`, 10, 20);
-    doc.text(`Country: ${inputData.country}`, 10, 20);
-    doc.text(`City: ${inputData.city}`, 10, 20);
-    doc.text(`Zip Code: ${inputData.zipcode}`, 10, 20);
-    doc.text(`Address: ${inputData.address}`, 10, 20);
-    doc.text(`Passport: ${inputData.passport}`, 10, 20);
-    doc.text(`Passport Number: ${inputData.passportno}`, 10, 20);
-    doc.text(`Passprot Issue Place: ${inputData.passportissuedate}`, 10, 20);
-    doc.text(`Passport Expir Date: ${inputData.passportexpirydate}`, 10, 20);
-    doc.text(`Arrival Date: ${inputData.arrivaldate}`, 10, 20);
-    doc.text(`Departuredate: ${inputData.departuredate}`, 10, 20);
-    doc.text(`Communication: ${inputData.communication}`, 10, 20);
-    doc.text(`Phone Number: ${inputData.phoneno}`, 10, 20);
-    doc.text(`Residential Rorelative: ${inputData.residentialaddresssaudi}`, 10, 20);
-    doc.text(`Name of Person: ${inputData.nameofperson}`, 10, 30);
-    doc.text(`Saudi City: ${inputData.scity}`, 10, 30);
-    doc.text(`Saudi City Address 1: ${inputData.address1}`, 10, 30);
-    doc.text(`Saudi City Address 2: ${inputData.address2}`, 10, 30);
-    doc.text(`Primary Number: ${inputData.primarynumber}`, 10, 30);
-    doc.text(`Email: ${inputData.email}`, 10, 30);
-    
-    // Download PDF file
-    doc.save('form-data.pdf');
   };
 
   return (
