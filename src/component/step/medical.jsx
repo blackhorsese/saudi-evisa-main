@@ -148,7 +148,7 @@ function Medical() {
 
           <div className="flex justify-center my-20 ">
             <p
-              onClick={() => handleNavigate("/passport")}
+              onClick={() => handleNavigate("/personal-info")}
               className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center"
             >
               PREVIOUS
