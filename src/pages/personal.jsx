@@ -307,7 +307,7 @@ const handleSubmit = async (event) => {
           {step === 1 && (
             <div>
               <div className="mt-20">
-                <p className=" text-[20px] font-semibold">Personal Picture</p>
+                <p className=" font-semibold">Personal Picture</p>
                 <p className="text-gray-400 text-sm py-4 md:w-1/2 md:mt-5">
                   Please upload picture of dimension 200 x 200 px Personal picture Size
                   must be from 5 to 100 Kb Allowed picture file types are .jpg,
@@ -315,7 +315,7 @@ const handleSubmit = async (event) => {
                 </p>
                 <div style={{ width: 'auto' }}>
                   <input type="file" accept="picture/*" required onChange={handlePictureUpload} />
-                  {picture == "" || picture == null ? "": <img className="pt-5" width={150} height={150} src={picture}/>}
+                  {picture == "" || picture == null ? "": <img className="pt-10 w-44" src={picture}/>}
                 </div>
               </div>
               <div className="mt-10 ">
@@ -327,7 +327,7 @@ const handleSubmit = async (event) => {
                 onChange={handleCountrynationalityChange}
                 type="text"
                 required
-                className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400">
+                className="border-[1px] border-gray-400 px-5 w-[100%] py-3 mt-5 placeholder-gray-400">
                   <option>Select</option>
                   <option value="Andorra">Andorra</option>
                   <option value="Australia">Australia</option>
@@ -373,7 +373,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleFirstnameChange}
                   placeholder="First Name or Given Name (English)"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
                 <p className="text-[12px] mt-2 text-gray-400">
                   Please make sure to enter the names exactly mentioned on your
@@ -394,7 +394,7 @@ const handleSubmit = async (event) => {
                   value={father}
                   onChange={handleFatherChange}
                   placeholder="Father Name or Middle Name (English)"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -409,7 +409,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleLastnameChange}
                   placeholder="Last Name or Family Name (English)*"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
                 <p className="text-[12px] mt-2 text-gray-400">
                   Please make sure to enter the names exactly mentioned on your
@@ -460,7 +460,7 @@ const handleSubmit = async (event) => {
                   value={dbirth}
                   required
                   onChange={handleDbirthChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
                 <p className="text-[12px] mt-2 text-gray-400">
                   Click on the title of the popup window to scroll multiple
@@ -732,7 +732,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleCtbirthChange}
                   placeholder="City of Birth*"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -744,7 +744,7 @@ const handleSubmit = async (event) => {
                   type="text"
                   required
                   placeholder="Profession"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
                 <p className="text-[12px] mt-2 text-gray-400">
                   In case of minor please write "None"
@@ -764,7 +764,7 @@ const handleSubmit = async (event) => {
                   type="text"
                   required
                   placeholder="Country"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]">
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400">
                   <option>Select</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
@@ -1017,7 +1017,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleCityChange}
                   placeholder="City"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1032,7 +1032,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleZipcodeChange}
                   placeholder="Zip/Postal Code"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1045,13 +1045,13 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleAddressChange}
                   placeholder="Address"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
               {/* Display error message */}
               {errorMessage && <p>{errorMessage}</p>}
               <button 
-                className="text-secondary text-base border-4 border-secondary rounded-xl py-2 px-20 block self-end my-10" 
+                className="ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end my-10" 
                 variant="primary" onClick={handleNext}>
                 Next
               </button>
@@ -1060,7 +1060,7 @@ const handleSubmit = async (event) => {
 
           {step === 2 && (
             <div>
-              <p className=" text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
+              <p className="mt-10 text-[15px] font-medium bg-gray-100 p-5 border-l-2 border-secondary">
                 Application No.: 230328006206727
               </p>
 
@@ -1073,7 +1073,7 @@ const handleSubmit = async (event) => {
                   value={passport}
                   required 
                   onChange={handlePassportChange} 
-                  className="border-[1px]  border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400 ">
+                  className="border-[1px]  border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400 ">
                   <option>Select</option>
                   <option value="diplomatic">Diplomatic Passport</option>
                   <option value="regular">Regular</option>
@@ -1090,7 +1090,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handlePassportnoChange}
                   placeholder="Passport No."
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1105,11 +1105,11 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handlePassportissueplaceChange}
                   placeholder="Passport Issue Place (Country or City)"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
-              <div className="md:flex grid ">
+              <div className="md:flex md:gap-x-12">
                 <div className="mt-10">
                   <label className="text-secondary font-medium ">
                     Passport Issue Date*
@@ -1120,7 +1120,7 @@ const handleSubmit = async (event) => {
                     value={passportissuedate}
                     required
                     onChange={handlePassportissuedateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                    className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Click on the title of the popup window to scroll multiple
@@ -1139,7 +1139,7 @@ const handleSubmit = async (event) => {
                     value={passportexpirydate}
                     required
                     onChange={handlePassportexpirydateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Passport must be valid at least 6 months from the Visa
@@ -1149,7 +1149,7 @@ const handleSubmit = async (event) => {
                 </div>
               </div>
 
-              <div className="md:flex grid ">
+              <div className="md:flex md:gap-x-12">
                 <div className="mt-10">
                   <label className="text-secondary font-medium ">
                     Expected Date of Arrival*
@@ -1160,7 +1160,7 @@ const handleSubmit = async (event) => {
                     value={arrivaldate}
                     required
                     onChange={handleArrivaldateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Expected Date of Arrival should be chosen in the Visa validity
@@ -1178,7 +1178,7 @@ const handleSubmit = async (event) => {
                     value={departuredate}
                     required
                     onChange={handleDeparturedateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[90%]  placeholder-gray-400 text-[20px]"
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     The tourist visa is valid for 1 year starting from the issuance
@@ -1200,7 +1200,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleCommunicationChange}
                   placeholder="example@gmail.com*"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
               <div className="mt-10">
@@ -1210,7 +1210,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handlePhonenoChange}
                   placeholder="+332222222232"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1241,7 +1241,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleNameofpersonChange}
                   placeholder="Name of Person"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1254,7 +1254,7 @@ const handleSubmit = async (event) => {
                   onChange={handleScityChange}
                   required
                   placeholder="City"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 >
                   <option>Select</option>
                   <option value="Abha">Abha</option>
@@ -1272,7 +1272,7 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleAddress1Change}
                   placeholder="Address 1"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
@@ -1285,18 +1285,18 @@ const handleSubmit = async (event) => {
                   required
                   onChange={handleAddress2Change}
                   placeholder="Address 2"
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
               </div>
 
-              <div className="md:flex  grid justify-between">
+              <div className="md:flex justify-between">
                 <div className="mt-10">
                   <label className="text-secondary font-medium ">
                     Primary Contact Number
                   </label>
                   <br />
-                  <div className="flex">
-                    <div className="border-2 border-gray-400 w-[20%] mt-3 p-3 text-[20px] text-gray-500">
+                  <div className="flex w-[100%]">
+                    <div className="border-2 border-gray-400 w-[20%] mt-3 p-3 text-gray-500">
                       966
                     </div>
                     <input
@@ -1305,13 +1305,13 @@ const handleSubmit = async (event) => {
                       required
                       onChange={handlePrimarynumberChange}
                       placeholder="XXXXXXXXXXX"
-                      className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                      className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                     />
                   </div>
                 </div>
 
                 <div className="mt-10">
-                  <label className="text-secondary font-medium ">Email</label>
+                  <label className="text-secondary font-medium">Email</label>
                   <br />
                   <input
                     type="mail"
@@ -1319,16 +1319,19 @@ const handleSubmit = async (event) => {
                     required
                     onChange={handleEmailChange}
                     placeholder="example@example.com"
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400 text-[20px]"
+                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                   />
                 </div>
               </div>
-              <div className="flex justify-center my-20">
-                  <button type="submit" variant="primary" value={handleSubmit}
-                    className="ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full  block h-[60px]  self-end"
-                  >
-                    Next
-                  </button>
+              <div className="flex justify-center my-16 md:my-20 md:gap-16">
+                <button className="cool-link text-black md:text-lg text-sm cursor-pointer self-center" onClick={handlePrev}>
+                  Previous
+                </button>{" "}
+                <button type="submit" value={handleSubmit}
+                  className="ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end"
+                >
+                  Next
+                </button>
               </div>
             </div>
             )};
