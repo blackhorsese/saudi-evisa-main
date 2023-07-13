@@ -157,7 +157,7 @@ function Medical() {
             <button
               onClick={() => {
                 if (isCheckboxChecked) {
-                  handleNavigate("/termss");
+                  handleNavigate("/terms");
                 }
               }}
               disabled={!isCheckboxChecked}
