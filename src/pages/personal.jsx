@@ -107,18 +107,26 @@ const handleSubmit = async (event) => {
   //   reader.readAsDataURL(file);
   // };
 
-  const handlePictureUpload = (event) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
+const handlePictureUpload = (event) => {
+  const file = event.target.files[0];
+
+  if (window.FileReader) {
+    const reader = new FileReader();
+    
     reader.onload = () => {
       console.log(reader.result);
-        setPicture(reader.result);
-      };
-      reader.onerror = error => {
-      console.log("error")
-    }
-  };
-    
+      setPicture(reader.result);
+    };
+
+    reader.onerror = (error) => {
+      console.log("Error occurred while reading the file.");
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    console.log("FileReader is not supported in this browser.");
+  }
+};
   
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
