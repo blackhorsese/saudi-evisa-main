@@ -3,6 +3,7 @@ import { useLocation,} from "react-router-dom";
 import Footer from "../component/footer";
 import Steppers from "../component/stepper";
 import React, { useState } from "react";
+import axios from 'axios';
 
 const PerfonalInfo = () => {
   const location = useLocation();
@@ -44,23 +45,24 @@ const PerfonalInfo = () => {
   const [email, setEmail] = useState ('');
 
 
-const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+  
     // Check if input data is valid
-    if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email ) {
+    if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email) {
       setErrorMessage('Please fill in all the fields');
       return;
     }
-
+  
     // Store input data in local storage
     const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
     localStorage.setItem('inputData', JSON.stringify(inputData));
-
+  
     try {
-      // Send POST request to API
+      // Send POST request to API using Axios
       const response = await postDataToAPI(inputData);
-      if (response.ok) {
-        const confirmation = window.confirm("Are you sure you want to submit this form?");
+      if (response.status === 200) {
+        const confirmation = window.confirm('Are you sure you want to submit this form?');
         if (confirmation) {
           // Redirect to selected coin's page
           window.location.href = '/medical';
@@ -72,16 +74,14 @@ const handleSubmit = async (event) => {
       console.error(error);
     }
   };
-
+  
   const postDataToAPI = async (inputData) => {
-    const response = await fetch ('https://eviasebackend.adaptable.app/user/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(inputData),
-    });
-    return response;
+    try {
+      const response = await axios.post('https://eviasebackend.adaptable.app/user/add', inputData);
+      return response;
+    } catch (error) {
+      throw new Error('An error occurred while sending the request:', error);
+    }
   };
   // const handlepictureUpload = (event) => {
   //   const file = event.target.files[0];
