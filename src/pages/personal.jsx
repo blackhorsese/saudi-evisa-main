@@ -54,26 +54,23 @@ const PerfonalInfo = () => {
       return;
     }
   
-    // Store input data in local storage
-    const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
-    localStorage.setItem('inputData', JSON.stringify(inputData));
-  
-    try {
-      // Send POST request to API using Axios
-      const response = await postDataToAPI(inputData);
-      if (response.status === 200) {
-        const confirmation = window.confirm('Are you sure you want to submit this form?');
-        if (confirmation) {
+     // Store input data in local storage
+      const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
+      localStorage.setItem('inputData', JSON.stringify(inputData));
+
+      try {
+        // Send POST request to API using Axios
+        const response = await postDataToAPI(inputData);
+        if (response.status === 200) {
           // Redirect to selected coin's page
           window.location.href = '/medical';
+        } else {
+          console.error('Server responded with an error:', response.statusText);
         }
-      } else {
-        console.error('Server responded with an error:', response.statusText);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
   
   const postDataToAPI = async (inputData) => {
     try {
