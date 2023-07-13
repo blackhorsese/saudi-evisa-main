@@ -141,16 +141,16 @@ function Medical() {
               checked={isCheckboxChecked}
               onChange={handleCheckboxChange}
             />
-            <p className=" text-[12px] md:text-[15px] ml-2 self-center">
+            <p className="ml-2 self-center md:text-lg text-base">
               {" "}
-              BY CHECKING THIS BOX I AGREE TO THE INSURANCE COVERAGE LISTED ABOVE WITH A FEE OF (180.00 SAR)
+              By checking this box, I agree to the insurance coverage listed above with a fee of 180.00 SAR.
             </p>
           </div>
 
-          <div className="flex justify-center my-20 ">
+          <div className="flex justify-center my-16 md:my-20 md:gap-16">
             <p
               onClick={() => handleNavigate("/personal-info")}
-              className="cool-link  text-black text-[12px] md:text-[18px] cursor-pointer self-center"
+              className="cool-link text-black md:text-lg text-sm cursor-pointer self-center"
             >
               PREVIOUS
             </p>
@@ -161,7 +161,7 @@ function Medical() {
                 }
               }}
               disabled={!isCheckboxChecked}
-              className={`ml-5 text-secondary text-[17px] border-4 border-secondary w-[30%] p-3 rounded-full block h-[60px]  self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               NEXT
             </button>
