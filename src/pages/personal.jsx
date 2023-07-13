@@ -107,17 +107,60 @@ const handleSubmit = async (event) => {
   //   reader.readAsDataURL(file);
   // };
 
+  // const handlePictureUpload = (event) => {
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(event.target.files[0]);
+  //   reader.onload = () => {
+  //     console.log(reader.result);
+  //       setPicture(reader.result);
+  //     };
+  //     reader.onerror = error => {
+  //     console.log("error")
+  //   }
+  // };
+  
+  // const handlePictureUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  
+  //   reader.onload = () => {
+  //     const pictureUrl = reader.result;
+  //     setPicture(pictureUrl);
+  //   };
+  
+  //   reader.onerror = (error) => {
+  //     console.log('Error: ', error);
+  //   };
+  
+  //   if (file) {
+  //     const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+  //     const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
+  //     setPicture(pictureUrl);
+  //   }
+  // };
+
   const handlePictureUpload = (event) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
     reader.onload = () => {
-      console.log(reader.result);
-        setPicture(reader.result);
-      };
-      reader.onerror = error => {
-      console.log("error")
+      const pictureUrl = reader.result;
+      setPicture(pictureUrl);
+    };
+  
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+  
+    if (file) {
+      if (/^image\//.test(file.type)) {
+        const pictureUrl = URL.createObjectURL(file);
+        setPicture(pictureUrl);
+      }
+      reader.readAsDataURL(file);
     }
-  };  
+  };
+    
   
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
