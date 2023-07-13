@@ -312,8 +312,8 @@ const Review = () => {
                 I have read and agree all the above terms and conditions.
             </p>
           </div>
-          <div className="flex justify-center my-16">
-            <p className="cool-link  text-black md:text-lg text-base cursor-pointer self-center mr-10">
+          <div className="flex justify-center my-16 md:my-20 md:gap-16">
+            <p className="cool-link text-black md:text-lg text-sm cursor-pointer self-center">
               Previous
             </p>
             <button 
@@ -323,7 +323,7 @@ const Review = () => {
                 }
               }}
               disabled={!isCheckboxChecked}
-              className={`border-4 border-secondary px-10 py-2 rounded-full text-secondary md:text-lg text-base cursor-pointer self-center mr-10 ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              className={`ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end ${!isCheckboxChecked ? 'opacity-50 cursor-not-allowed' : ''}`}>
               Payment
             </button>
           </div>
