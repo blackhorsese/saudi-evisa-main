@@ -371,7 +371,7 @@ const PerfonalInfo = () => {
     }
 
     setTimeout(() => {
-      const confirmation = window.confirm("Are you sure you want to submit this form? You will be redirected to the selected coin's page.");
+      const confirmation = window.confirm("Are you sure you want to submit this form?");
       if (confirmation) {
             window.location.href = '/medical';
       }
