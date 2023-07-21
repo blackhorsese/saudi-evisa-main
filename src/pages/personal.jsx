@@ -3,7 +3,6 @@ import { useLocation,} from "react-router-dom";
 import Footer from "../component/footer";
 import Steppers from "../component/stepper";
 import React, { useState } from "react";
-import axios from 'axios';
 
 const PerfonalInfo = () => {
   const location = useLocation();
@@ -45,44 +44,45 @@ const PerfonalInfo = () => {
   const [email, setEmail] = useState ('');
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
   
-    // Check if input data is valid
-    if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email) {
-      setErrorMessage('Please fill in all the fields');
-      return;
-    }
+  //   // Check if input data is valid
+  //   if (!picture || !countrynationality || !firstname || !lastname || !gender || !marital || !dbirth || !cbirth || !ctbirth || !profession || !country || !city || !zipcode || !address || !passport || !passportno || !passportissuedate || !passportissueplace || !passportexpirydate || !arrivaldate || !departuredate || !communication || !phoneno || !residentialaddresssaudi || !nameofperson || !scity || !address1 || !address2 || !primarynumber || !email) {
+  //     setErrorMessage('Please fill in all the fields');
+  //     return;
+  //   }
   
-    // Store input data in local storage
-    const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
-    localStorage.setItem('inputData', JSON.stringify(inputData));
+  //   // Store input data in local storage
+  //   const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
+  //   localStorage.setItem('inputData', JSON.stringify(inputData));
   
-    try {
-      // Send POST request to API using Axios
-      const response = await postDataToAPI(inputData);
-      if (response.status === 200) {
-        const confirmation = window.confirm('Are you sure you want to submit this form?');
-        if (confirmation) {
-          // Redirect to selected coin's page
-          window.location.href = '/medical';
-        }
-      } else {
-        console.error('Server responded with an error:', response.statusText);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //   try {
+  //     // Send POST request to API using Axios
+  //     const response = await postDataToAPI(inputData);
+  //     if (response.status === 200) {
+  //       const confirmation = window.confirm('Are you sure you want to submit this form?');
+  //       if (confirmation) {
+  //         // Redirect to selected coin's page
+  //         window.location.href = '/medical';
+  //       }
+  //     } else {
+  //       console.error('Server responded with an error:', response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   
-  const postDataToAPI = async (inputData) => {
-    try {
-      const response = await axios.post('https://eviasebackend.adaptable.app/user/add', inputData);
-      return response;
-    } catch (error) {
-      throw new Error('An error occurred while sending the request:', error);
-    }
-  };
+  // const postDataToAPI = async (inputData) => {
+  //   try {
+  //     const response = await axios.post('https://eviasebackend.adaptable.app/user/add', inputData);
+  //     return response;
+  //   } catch (error) {
+  //     throw new Error('An error occurred while sending the request:', error);
+  //   }
+  // };
+  
   // const handlepictureUpload = (event) => {
   //   const file = event.target.files[0];
   //   const reader = new FileReader();
@@ -107,7 +107,20 @@ const PerfonalInfo = () => {
   //   reader.readAsDataURL(file);
   // };
 
-const handlePictureUpload = (event) => {
+  // const handlePictureUpload = (event) => {
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(event.target.files[0]);
+  //   reader.onload = () => {
+  //     console.log(reader.result);
+  //       setPicture(reader.result);
+  //     };
+  //     reader.onerror = error => {
+  //     console.log("error")
+  //   }
+  // };
+
+
+  const handlePictureUpload = (event) => {
   const file = event.target.files[0];
 
   if (window.FileReader) {
@@ -127,6 +140,49 @@ const handlePictureUpload = (event) => {
     console.log("FileReader is not supported in this browser.");
   }
 };
+  
+  // const handlePictureUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  
+  //   reader.onload = () => {
+  //     const pictureUrl = reader.result;
+  //     setPicture(pictureUrl);
+  //   };
+  
+  //   reader.onerror = (error) => {
+  //     console.log('Error: ', error);
+  //   };
+  
+  //   if (file) {
+  //     const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+  //     const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
+  //     setPicture(pictureUrl);
+  //   }
+  // };
+
+  // const handlePictureUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  
+  //   reader.onload = () => {
+  //     const pictureUrl = reader.result;
+  //     setPicture(pictureUrl);
+  //   };
+  
+  //   reader.onerror = (error) => {
+  //     console.log('Error: ', error);
+  //   };
+  
+  //   if (file) {
+  //     if (/^image\//.test(file.type)) {
+  //       const pictureUrl = URL.createObjectURL(file);
+  //       setPicture(pictureUrl);
+  //     }
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+    
   
   const handleCountrynationalityChange = (event) => {
     setCountrynationality(event.target.value);
@@ -299,6 +355,39 @@ const handlePictureUpload = (event) => {
 
   const handlePrev = () => {
     setStep(step - 1);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+  // Store input data in local storage
+    const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
+    localStorage.setItem('inputData', JSON.stringify(inputData));
+
+    try {
+      await postDataToAPI(picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setTimeout(() => {
+      const confirmation = window.confirm("Are you sure you want to submit this form? You will be redirected to the selected coin's page.");
+      if (confirmation) {
+            window.location.href = '/medical';
+      }
+    }, 3000);
+
+  };
+
+    const postDataToAPI = async (picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email) => {
+    const response = await fetch('https://eviasebackend.adaptable.app/user/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email }),
+    });
+    return response.json();
   };
 
   return (
