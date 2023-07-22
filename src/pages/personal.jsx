@@ -3,10 +3,14 @@ import { useLocation,} from "react-router-dom";
 import Footer from "../component/footer";
 import Steppers from "../component/stepper";
 import React, { useState } from "react";
+import { ThreeDots } from 'react-loader-spinner';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const PerfonalInfo = () => {
   const location = useLocation();
   const [step, setStep] = useState(1);
+  const [error, setError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [passportExpiryErrorMessage, setPassportExpiryErrorMessage] = useState('');
   const [picture, setPicture] = useState(null);
@@ -16,7 +20,7 @@ const PerfonalInfo = () => {
   const [lastname, setLastname] = useState('');
   const [gender, setGender] = useState ('');
   const [marital, setMarital] = useState ('');
-  const [dbirth, setDbirth] = useState ('');
+  const [dbirth, setDbirth] = useState (null);
   const [cbirth, setCbirth] = useState ('');
   const [ctbirth, setCtbirth] = useState ('');
   const [profession, setProfession] = useState ('');
@@ -24,6 +28,7 @@ const PerfonalInfo = () => {
   const [city, setCity] = useState ('');
   const [zipcode, setZipcode] = useState ('');
   const [address, setAddress] = useState ('');
+  const [loading, setLoading] = useState(false);
   
   // Step 2 Form Data
   const [passport, setPassport] = useState("");
@@ -208,21 +213,18 @@ const PerfonalInfo = () => {
     setMarital(event.target.value);
   }
 
-  const handleDbirthChange = (event) => {
-    const enteredDbirth = event.target.value;
+  const handleDbirthChange = (date) => {
+    setDbirth(date);
+
     const today = new Date();
-    const enteredDate = new Date(enteredDbirth);
-    const ageDiff = today - enteredDate;
-    const ageDate = new Date(ageDiff);
-    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-  
-    if (age >= 18) {
-      setDbirth(enteredDbirth);
+    const selectedDate = new Date(date);
+    const age = today.getFullYear() - selectedDate.getFullYear();
+
+    // Check if the user is under 18 years old
+    if (age < 18) {
+      setError('You must be at least 18 years old.');
     } else {
-      // Display an error message or handle the error
-      alert('You must be at least 18 years old.');
-      // Optionally, you can clear the input field or perform other actions
-      // event.target.value = '';
+      setError('');
     }
   }
 
@@ -265,16 +267,16 @@ const PerfonalInfo = () => {
     setPassportissueplace(event.target.value);
   }
 
-  const handlePassportissuedateChange = (event) => {
-    setPassportissuedate(event.target.value);
+  const handlePassportissuedateChange = (date) => {
+    setPassportissuedate(date);
   };
   
 
-  const handlePassportexpirydateChange = (event) => {
-    setPassportexpirydate(event.target.value);
+  const handlePassportexpirydateChange = (date) => {
+    setPassportexpirydate(date);
   
     const currentDate = new Date();
-    const selectedDate = new Date(event.target.value);
+    const selectedDate = new Date(date);
   
     if (selectedDate < currentDate) {
       setPassportExpiryErrorMessage('Passport has already expired');
@@ -283,12 +285,12 @@ const PerfonalInfo = () => {
     }
   };
 
-  const handleArrivaldateChange = (event) => {
-    setArrivaldate(event.target.value);
+  const handleArrivaldateChange = (date) => {
+    setArrivaldate(date);
   }
 
-  const handleDeparturedateChange = (event) => {
-    setDeparturedate(event.target.value);
+  const handleDeparturedateChange = (date) => {
+    setDeparturedate(date);
   }
 
   const handleCommunicationChange = (event) => {
@@ -359,6 +361,8 @@ const PerfonalInfo = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    setError(true);
 
   // Store input data in local storage
     const inputData = { picture, countrynationality, firstname, father, lastname, gender, marital, dbirth, cbirth, ctbirth, profession, country, city, zipcode, address, passport, passportno, passportissuedate, passportissueplace, passportexpirydate, arrivaldate, departuredate, communication, phoneno, residentialaddresssaudi, nameofperson, scity, address1, address2, primarynumber, email };
@@ -520,10 +524,10 @@ const PerfonalInfo = () => {
 
                 <br />
                 <select value={gender} 
-                onChange={handleGenderChange}
-                type="text"
-                required 
-                className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400">
+                  onChange={handleGenderChange}
+                  type="text"
+                  required 
+                  className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5 placeholder-gray-400">
                   <option>Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -553,13 +557,13 @@ const PerfonalInfo = () => {
                   Date of Birth*
                 </label>
                 <br />
-                <input
-                  type="date"
-                  value={dbirth}
+                <DatePicker
+                  selected={dbirth}
                   required
                   onChange={handleDbirthChange}
-                  className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                 />
+                {error && <p className="text-red-500 text-sm pt-3">{error}</p>}
                 <p className="text-[12px] mt-2 text-gray-400">
                   Click on the title of the popup window to scroll multiple
                   months/years at a time
@@ -575,7 +579,7 @@ const PerfonalInfo = () => {
                   value={cbirth}
                   required 
                   onChange={handleCbirthChange} 
-                  className="border-[1px] border-gray-400 px-3  w-[100%] py-3 mt-5  placeholder-gray-400">
+                  className="border-[1px] border-gray-400 px-3 w-[100%] py-3 mt-5  placeholder-gray-400">
                   <option>Select</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
@@ -1213,9 +1217,8 @@ const PerfonalInfo = () => {
                     Passport Issue Date*
                   </label>
                   <br />
-                  <input
-                    type="date"
-                    value={passportissuedate}
+                  <DatePicker
+                    selected={passportissuedate}
                     required
                     onChange={handlePassportissuedateChange}
                     className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
@@ -1231,10 +1234,8 @@ const PerfonalInfo = () => {
                     Passport Expiry Date*
                   </label>
                   <br />
-                  <input
-                    type="date"
-                    id="passportexpirydate"
-                    value={passportexpirydate}
+                  <DatePicker
+                    selected={passportexpirydate}
                     required
                     onChange={handlePassportexpirydateChange}
                     className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
@@ -1253,9 +1254,8 @@ const PerfonalInfo = () => {
                     Expected Date of Arrival*
                   </label>
                   <br />
-                  <input
-                    type="date"
-                    value={arrivaldate}
+                  <DatePicker
+                    selected={arrivaldate}
                     required
                     onChange={handleArrivaldateChange}
                     className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
@@ -1271,9 +1271,8 @@ const PerfonalInfo = () => {
                     Expected Date of Departure*
                   </label>
                   <br />
-                  <input
-                    type="date"
-                    value={departuredate}
+                  <DatePicker
+                    selected={departuredate}
                     required
                     onChange={handleDeparturedateChange}
                     className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
@@ -1425,8 +1424,10 @@ const PerfonalInfo = () => {
                 <button className="cool-link text-black md:text-lg text-sm cursor-pointer self-center" onClick={handlePrev}>
                   Previous
                 </button>{" "}
-                <button type="submit" value={handleSubmit}
+                <button 
+                type="submit" value={handleSubmit}
                   className="ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end"
+                  
                 >
                   Next
                 </button>
