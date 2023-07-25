@@ -566,7 +566,7 @@ const PerfonalInfo = () => {
                   selected={dbirth}
                   required
                   onChange={handleDbirthChange}
-                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                  className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] md:w-[56.5rem] md:px-4 placeholder-gray-400"
                 />
                 {error && <p className="text-red-500 text-sm pt-3">{error}</p>}
                 <p className="text-[12px] mt-2 text-gray-400">
@@ -1197,7 +1197,7 @@ const PerfonalInfo = () => {
                   required
                   onChange={handlePassportnoChange}
                   placeholder="Passport No."
-                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                  className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] md:w-[56.5rem] md:px-4 placeholder-gray-400"
                 />
               </div>
 
@@ -1212,7 +1212,7 @@ const PerfonalInfo = () => {
                   required
                   onChange={handlePassportissueplaceChange}
                   placeholder="Passport Issue Place (Country or City)"
-                  className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                  className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] md:w-[56.5rem] md:px-4 placeholder-gray-400"
                 />
               </div>
 
@@ -1226,7 +1226,7 @@ const PerfonalInfo = () => {
                     selected={passportissuedate}
                     required
                     onChange={handlePassportissuedateChange}
-                    className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                    className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] lg:w-[26.7rem] md:px-4 placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Click on the title of the popup window to scroll multiple
@@ -1243,7 +1243,7 @@ const PerfonalInfo = () => {
                     selected={passportexpirydate}
                     required
                     onChange={handlePassportexpirydateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
+                    className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] lg:w-[26.7rem] md:px-4 placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Passport must be valid at least 6 months from the Visa
@@ -1263,7 +1263,7 @@ const PerfonalInfo = () => {
                     selected={arrivaldate}
                     required
                     onChange={handleArrivaldateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
+                    className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] lg:w-[26.7rem] md:px-4 placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     Expected Date of Arrival should be chosen in the Visa validity
@@ -1280,7 +1280,7 @@ const PerfonalInfo = () => {
                     selected={departuredate}
                     required
                     onChange={handleDeparturedateChange}
-                    className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%]  placeholder-gray-400"
+                    className="mt-3 border-[1px] border-gray-400 py-3 px-4 w-[22rem] lg:w-[26.7rem] md:px-4 placeholder-gray-400"
                   />
                   <p className="text-[12px] mt-2 text-gray-400">
                     The tourist visa is valid for 1 year starting from the issuance
@@ -1407,7 +1407,7 @@ const PerfonalInfo = () => {
                       required
                       onChange={handlePrimarynumberChange}
                       placeholder="XXXXXXXXXXX"
-                      className="mt-3 border-[1px] border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
+                      className="mt-3 border-[1px]  border-gray-400 px-3 py-3 w-[100%] placeholder-gray-400"
                     />
                   </div>
                 </div>
