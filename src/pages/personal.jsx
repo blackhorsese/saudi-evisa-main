@@ -435,7 +435,7 @@ const PerfonalInfo = () => {
                 type="text"
                 required
                 className="border-[1px] border-gray-400 px-5 w-[100%] py-3 mt-5 placeholder-gray-400">
-                  <option>Select</option>
+                  <option className="border-[1px] border-gray-400 px-5 w-[100%] py-3 mt-5 placeholder-gray-400">Select</option>
                   <option value="Andorra">Andorra</option>
                   <option value="Australia">Australia</option>
                   <option value="Austria">Austria</option>
