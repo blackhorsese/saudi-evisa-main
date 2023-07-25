@@ -125,46 +125,46 @@ const PerfonalInfo = () => {
   // };
 
 
-  const handlePictureUpload = (event) => {
-  const file = event.target.files[0];
+//   const handlePictureUpload = (event) => {
+//   const file = event.target.files[0];
 
-  if (window.FileReader) {
-    const reader = new FileReader();
+//   if (window.FileReader) {
+//     const reader = new FileReader();
     
+//     reader.onload = () => {
+//       console.log(reader.result);
+//       setPicture(reader.result);
+//     };
+
+//     reader.onerror = (error) => {
+//       console.log("Error occurred while reading the file.");
+//     };
+
+//     reader.readAsDataURL(file);
+//   } else {
+//     console.log("FileReader is not supported in this browser.");
+//   }
+// };
+  
+  const handlePictureUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
     reader.onload = () => {
-      console.log(reader.result);
-      setPicture(reader.result);
+      const pictureUrl = reader.result;
+      setPicture(pictureUrl);
     };
-
+  
     reader.onerror = (error) => {
-      console.log("Error occurred while reading the file.");
+      console.log('Error: ', error);
     };
-
-    reader.readAsDataURL(file);
-  } else {
-    console.log("FileReader is not supported in this browser.");
-  }
-};
   
-  // const handlePictureUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-  
-  //   reader.onload = () => {
-  //     const pictureUrl = reader.result;
-  //     setPicture(pictureUrl);
-  //   };
-  
-  //   reader.onerror = (error) => {
-  //     console.log('Error: ', error);
-  //   };
-  
-  //   if (file) {
-  //     const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-  //     const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
-  //     setPicture(pictureUrl);
-  //   }
-  // };
+    if (file) {
+      const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+      const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
+      setPicture(pictureUrl);
+    }
+  };
 
   // const handlePictureUpload = (event) => {
   //   const file = event.target.files[0];
