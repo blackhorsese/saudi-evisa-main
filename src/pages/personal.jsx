@@ -146,26 +146,6 @@ const PerfonalInfo = () => {
 //   }
 // };
   
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-  
-    reader.onload = () => {
-      const pictureUrl = reader.result;
-      setPicture(pictureUrl);
-    };
-  
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
-  
-    if (file) {
-      const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
-      const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
-      setPicture(pictureUrl);
-    }
-  };
-
   // const handlePictureUpload = (event) => {
   //   const file = event.target.files[0];
   //   const reader = new FileReader();
@@ -180,13 +160,33 @@ const PerfonalInfo = () => {
   //   };
   
   //   if (file) {
-  //     if (/^image\//.test(file.type)) {
-  //       const pictureUrl = URL.createObjectURL(file);
-  //       setPicture(pictureUrl);
-  //     }
-  //     reader.readAsDataURL(file);
+  //     const isAppleDevice = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+  //     const pictureUrl = isAppleDevice ? URL.createObjectURL(file) : reader.readAsDataURL(file);
+  //     setPicture(pictureUrl);
   //   }
   // };
+
+  const handlePictureUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      const pictureUrl = reader.result;
+      setPicture(pictureUrl);
+    };
+  
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+  
+    if (file) {
+      if (/^image\//.test(file.type)) {
+        const pictureUrl = URL.createObjectURL(file);
+        setPicture(pictureUrl);
+      }
+      reader.readAsDataURL(file);
+    }
+  };
     
   
   const handleCountrynationalityChange = (event) => {
