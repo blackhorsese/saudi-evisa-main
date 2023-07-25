@@ -125,26 +125,31 @@ const PerfonalInfo = () => {
   // };
 
 
-//   const handlePictureUpload = (event) => {
-//   const file = event.target.files[0];
-
-//   if (window.FileReader) {
-//     const reader = new FileReader();
-    
-//     reader.onload = () => {
-//       console.log(reader.result);
-//       setPicture(reader.result);
-//     };
-
-//     reader.onerror = (error) => {
-//       console.log("Error occurred while reading the file.");
-//     };
-
-//     reader.readAsDataURL(file);
-//   } else {
-//     console.log("FileReader is not supported in this browser.");
-//   }
-// };
+  const handlePictureUpload = (event) => {
+    const file = event.target.files[0];
+  
+    if (!file) {
+      console.log("No file selected.");
+      return;
+    }
+  
+    if (window.FileReader) {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        console.log(reader.result);
+        setPicture(reader.result);
+      };
+  
+      reader.onerror = (error) => {
+        console.log("Error occurred while reading the file.");
+      };
+  
+      reader.readAsDataURL(file);
+    } else {
+      console.log("FileReader is not supported in this browser.");
+    }
+  };  
   
   // const handlePictureUpload = (event) => {
   //   const file = event.target.files[0];
@@ -166,27 +171,27 @@ const PerfonalInfo = () => {
   //   }
   // };
 
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+  // const handlePictureUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
   
-    reader.onload = () => {
-      const pictureUrl = reader.result;
-      setPicture(pictureUrl);
-    };
+  //   reader.onload = () => {
+  //     const pictureUrl = reader.result;
+  //     setPicture(pictureUrl);
+  //   };
   
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+  //   reader.onerror = (error) => {
+  //     console.log('Error: ', error);
+  //   };
   
-    if (file) {
-      if (/^image\//.test(file.type)) {
-        const pictureUrl = URL.createObjectURL(file);
-        setPicture(pictureUrl);
-      }
-      reader.readAsDataURL(file);
-    }
-  };
+  //   if (file) {
+  //     if (/^image\//.test(file.type)) {
+  //       const pictureUrl = URL.createObjectURL(file);
+  //       setPicture(pictureUrl);
+  //     }
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
     
   
   const handleCountrynationalityChange = (event) => {
@@ -416,7 +421,7 @@ const PerfonalInfo = () => {
                   .jpeg, .png, .gif, .bmp Photo Specifications
                 </p>
                 <div style={{ width: 'auto' }}>
-                  <input type="file" accept="picture/*" required onChange={handlePictureUpload} />
+                  <input type="file" accept="image/*" required onChange={handlePictureUpload} />
                   {picture == "" || picture == null ? "": <img className="pt-10 w-44" src={picture}/>}
                 </div>
               </div>
