@@ -435,7 +435,7 @@ const PerfonalInfo = () => {
                 type="text"
                 required
                 className="border-[1px] border-gray-400 px-5 w-[100%] py-3 mt-5 placeholder-gray-400">
-                  <option>Select</option>
+                  <option className="border-[1px] border-gray-400 px-5 w-[100%] py-3 mt-5 placeholder-gray-400">Select</option>
                   <option value="Andorra">Andorra</option>
                   <option value="Australia">Australia</option>
                   <option value="Austria">Austria</option>
@@ -1429,13 +1429,19 @@ const PerfonalInfo = () => {
                 <button className="cool-link text-black md:text-lg text-sm cursor-pointer self-center" onClick={handlePrev}>
                   Previous
                 </button>{" "}
-                <button 
-                type="submit" value={handleSubmit}
-                  className="ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end"
-                  
-                >
-                  Next
-                </button>
+                  <button
+                    value={handleSubmit} 
+                    className="ml-5 text-secondary md:text-lg text-sm border-4 border-secondary md:w-64 w-48 items-center p-3 rounded-full block self-end my-10"
+                    type="submit">
+                    {loading ? (
+                      <div className='flex items-center gap-3 cursor-progress'>
+                        <span className='text-base text-center justify-center'>Loading</span>
+                        <ThreeDots height="20" width="20" radius="9" color="secondary" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClassName="" visible={true}/>
+                      </div>
+                      ) : (
+                      'Submit'
+                    )}
+                  </button>
               </div>
             </div>
             )};
