@@ -13,7 +13,7 @@ export default function Banner({ color }) {
       <div className="bg ">
         <Navbar color={color} />
 
-        <div className="py-20 lg:py-40 max-w-screen-2xl mx-auto justify-center overflow-hidden w-full px-10">
+        <div className="py-20 lg:py-40 max-w-screen-2xl mx-auto justify-center overflow-hidden w-full md:px-20">
           <div>
             <p className="md:text-8xl text-5xl 2/3 lg:w-1/2 font-medium font-displace text-white leading-[1]">
               Welcome to the Saudi eVisa Portal
