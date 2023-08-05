@@ -70,7 +70,7 @@ export default function Example({ open, setOpen }) {
                         Apply for eVisa
                       </a>
                       <a href="/contact-us" 
-                        className="self-center mt-5 items-center text-white font-bold"
+                        className="self-center mt-5 items-center text-secondary font-bold"
                       >
                         Contact Us
                       </a>
