@@ -13,13 +13,13 @@ export default function Banner({ color }) {
       <div className="bg ">
         <Navbar color={color} />
 
-        <div className="grid grid-cols-1 ml-10 lg:ml-20 py-20 lg:py-40">
+        <div className="py-20 lg:py-40 max-w-screen-2xl mx-auto justify-center overflow-hidden w-full px-10">
           <div>
-            <p className="md:text-8xl text-4xl 2/3 lg:w-1/2 font-medium font-displace text-white leading-[1]">
+            <p className="md:text-8xl text-5xl 2/3 lg:w-1/2 font-medium font-displace text-white leading-[1]">
               Welcome to the Saudi eVisa Portal
             </p>
 
-            <p className="text-[20px] w-4/5 mt-10 font-medium text-white ">
+            <p className="md:text-xl text-lg md:mt-10 mt-5 md:font-medium text-white ">
               Planning a trip to Saudi Arabia? Get your visa now, it only takes
               3 simple steps…
             </p>
@@ -27,9 +27,9 @@ export default function Banner({ color }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1  md:grid-cols-3  xl:grid-cols-4 py-10 w-full lg:w-[90%] mx-auto bg-white shadow-lg  mt-0 md:-mt-10 lg:-mt-20 mb-10">
+      <div className="md:flex lg:flex justify-between py-10 px-10 md:-mt-20 w-full max-w-screen-xl mx-auto bg-white shadow-lg">
         <div className="flex justify-center ">
-          <h6 className="text-[2.4rem] text-secondary font-normal font-displace ">
+          <h6 className="text-[2.4rem] text-secondary font-normal font-displace">
             01 .
           </h6>
           <p className="text-[1.0rem] ml-5 self-center mt-3 lg:mt-4 xl:mt-0">
