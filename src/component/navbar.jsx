@@ -15,9 +15,9 @@ export default function Navbar({ color }) {
   const handleOnClose = () => setOpen(false);
   console.log("color!!!!!", color);
   return (
-    <div className="bg-grey md:bg-transparent">
-      <div className=" grid grid-cols-3 p-5  md:p-10">
-        <div className="self-center ">
+    <div className="bg-grey md:bg-transparent max-w-8xl justify-center mx-auto overflow-hidden px-20">
+      <div className=" grid grid-cols-3 p-5 md:p-10">
+        <a href="/" className="self-center ">
           {color === "/visa" ? (
             <img className=" h-[60px] cursor-pointer" src={Logo2} />
           ) : color === "/method" ? (
@@ -43,19 +43,14 @@ export default function Navbar({ color }) {
           ) : (
             <img className=" h-[60px] cursor-pointer" src={Logo} />
           )}
-        </div>
+        </a>
         <div></div>
-        <div className="  justify-between self-center hidden lg:flex ">
-          <p
-            onClick={() => handleNavigate("/")}
-            className="text-base self-center"
-            style={{
-              color: color === "/" ? "white" : "black",
-              cursor: "pointer",
-            }}
+        <div className="self-center hidden lg:flex ">
+          <a href="/personal-info" 
+          className="text-sm bg-white font-semibold items-center justify-center border-2 text-black rounded-full mx-auto px-6 py-2"
           >
-            VISIT SAUDI VISA
-          </p>
+            APPLY NOW
+          </a>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
