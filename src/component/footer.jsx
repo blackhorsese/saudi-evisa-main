@@ -14,39 +14,39 @@ function Footer() {
 
   const handleButtonClick = () => {
     window.open(
-      "https://help.visitsaudi.com/?_ga=2.110485383.325474545.1679289825-2067208994.1678883007"
+      "/contact-us"
     );
   };
 
   return (
     <React.Fragment>
       <div className="bg-grey py-5 ">
-        <div className="grid grid-cols-1  md:grid-cols-3 py-5 border-b-[1px] border-gray-800    w-[95%] mx-auto">
-          <div className="col-span-2  flex justify-around self-center ">
+        <div className="grid grid-cols-1  md:grid-cols-3 py-5 border-b-[1px] border-gray-800 w-[95%] mx-auto">
+          <div className="col-span-2 flex justify-around self-center ">
             <p
-              onClick={() => handleNavigate("/terms")}
-              className="text-[10px] md:text-[15px]   font-medium text-white underline cursor-pointer "
+              onClick={() => handleNavigate("/termss")}
+              className="text-[10px] md:text-[15px] font-medium text-white underline cursor-pointer "
             >
               Terms and conditions
             </p>
 
             <p
               onClick={() => handleNavigate("/privact-policy")}
-              className="text-[10px] md:text-[15px]    font-medium text-white underline  cursor-pointer"
+              className="text-[10px] md:text-[15px] font-medium text-white underline  cursor-pointer"
             >
               Privacy policy
             </p>
 
             <p
               onClick={handleButtonClick}
-              className="text-[10px] md:text-[15px]    font-medium text-white underline cursor-pointer"
+              className="text-[10px] md:text-[15px] marker:font-medium text-white underline cursor-pointer"
             >
               Contact us
             </p>
 
             <p
               onClick={() => handleNavigate("/info")}
-              className="text-[10px] md:text-[15px]   font-medium text-white underline cursor-pointer"
+              className="text-[10px] md:text-[15px] font-medium text-white underline cursor-pointer"
             >
               Important info
             </p>
