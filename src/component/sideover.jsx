@@ -65,12 +65,12 @@ export default function Example({ open, setOpen }) {
                         Planning a trip to Saudi Arabia? Get your visa now, it only takes 3 simple steps.
                       </p>
                       <a href="/personal-info" 
-                        className="self-center uppercase mt-10 items-center text-sm font-bold text-white"
+                        className="self-center mt-10 items-center text-white"
                       >
-                        APPLY NOW
+                        Apply for eVisa
                       </a>
                       <a href="/contact-us" 
-                        className="self-center uppercase mt-5 items-center text-sm font-bold text-white"
+                        className="self-center mt-5 items-center text-white font-bold"
                       >
                         Contact Us
                       </a>
