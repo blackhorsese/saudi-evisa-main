@@ -15,7 +15,7 @@ export default function Navbar({ color }) {
   const handleOnClose = () => setOpen(false);
   console.log("color!!!!!", color);
   return (
-    <div className="bg-grey md:bg-transparent max-w-8xl justify-center mx-auto overflow-hidden px-20">
+    <div className="bg-grey md:bg-transparent max-w-8xl justify-center mx-auto overflow-hidden md:px-20">
       <div className=" grid grid-cols-3 p-5 md:p-10">
         <a href="/" className="self-center ">
           {color === "/visa" ? (
@@ -45,13 +45,12 @@ export default function Navbar({ color }) {
           )}
         </a>
         <div></div>
-        <div className="self-center hidden lg:flex ">
-          <a href="/personal-info" 
-          className="text-sm bg-white font-semibold items-center justify-center border-2 text-black rounded-full mx-auto px-6 py-2"
+        <div className="self-center hidden lg:flex gap-10 justify-end">
+          <a href="/contact-us" 
+            className="text-sm bg-white font-semibold items-center justify-center border-2 text-black rounded-full px-6 py-2"
           >
-            APPLY NOW
+            Contact Us
           </a>
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
