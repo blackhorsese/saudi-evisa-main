@@ -319,7 +319,7 @@ const Review = () => {
             <button 
               onClick={() => {
                 if (isCheckboxChecked) {
-                  window.location.href = 'https://buy.stripe.com/4gw7ud3ShcYN20obIQ';
+                  window.location.href = 'https://buy.stripe.com/00g9D373tfJPcrSfZ0';
                 }
               }}
               disabled={!isCheckboxChecked}
