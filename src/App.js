@@ -14,6 +14,7 @@ import Termss from "./component/step/termss";
 import Review from "./component/step/review";
 import Method from "./component/step/method";
 import Formdata from "./pages/formdata";
+import Contact from "./component/step/contact";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/terms" element={<Termss />} />
           <Route path="/review" element={<Review />} />
           <Route path="/method" element={<Method />} />
+          <Route path="/contact-us" element={<Contact />} />
         </Routes>
       </Router>
     </React.Fragment>
