@@ -23,6 +23,19 @@
   background-position: center;
 }
 
+.fixed-section {
+  position: sticky;
+  top: 0;
+  background-color: #fff; /* Change this to your desired background color */
+  padding: 10px; /* Adjust padding as needed */
+  z-index: 100; /* Adjust the z-index to ensure it's above other content */
+}
+
+/* Style for the content below the fixed section */
+.content {
+  padding: 20px; /* Add padding to create space below the fixed section */
+}
+
 .cool-link {
   display: inline-block;
   color: #000;
