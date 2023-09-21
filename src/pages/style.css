@@ -17,6 +17,12 @@
   margin-bottom: 100px;
 }
 
+.supportser {
+  background-image: url("/public/96e10f42-57d6-41b6-a1be-43b7fd816370.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 .cool-link {
   display: inline-block;
   color: #000;
