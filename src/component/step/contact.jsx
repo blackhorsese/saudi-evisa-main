@@ -51,39 +51,15 @@ const Contact = () => {
   return (
     <>
     <div className='supportser'>
-        <div className=''>
-            <Navbar color={location.pathname} />
-            <h1 className='mx-auto text-7xl py-40 max-w-screen-2xl font-displace text-white leading-[1]'>
-                Tourist Care
-            </h1>
-        </div>
+        <Navbar color={location.pathname} />
+        <h1 className='px-5 md:px-10 mx-auto md:text-7xl text-5xl max-w-screen-2xl font-displace text-white leading-[1] md:py-44 py-24'>
+            Tourist Care
+        </h1>
     </div>
-    <div className='md:px-10 mx-auto px-5'>
-        <div className='fixed-section my-3 w-full bg-[#fff] font-semibold justify-between flex px-10 text-lg max-w-screen-2xl mx-auto text-[#6e6e6e] border-b border-b-[#b1b1b1]'>
-            <div className=''>
-                <h1>
-                    Contact us
-                </h1>
-            </div>
-            <div>
-                <h1>
-                    Frequently Asked Questions
-                </h1>
-            </div>
-            <div>
-                <h1>
-                    Call Us
-                </h1>
-            </div>
-            <div>
-                <h1>
-                    Social & Other Channels
-                </h1>
-            </div>
-        </div>
+    <div className='md:px-10 px-5 justify-center mx-auto'>
         <div className='max-w-screen-2xl mx-auto align-middle'>
-            <div className='md:px-10 px-5 mx-auto pt-20'>
-                <h1 className='text-4xl font-semibold'>
+            <div className='mx-auto md:pt-20 pt-10'>
+                <h1 className='md:text-4xl text-2xl font-semibold'>
                     Contact Us
                 </h1>
                 <p className='text-[#949494] py-2'>
@@ -91,7 +67,7 @@ const Contact = () => {
                 </p>
             </div>
         </div>
-        <div className='text-black py-5 md:px-10 px-5 max-w-screen-2xl mx-auto'>
+        <div className='text-black py-5 max-w-screen-2xl mx-auto'>
             <form onSubmit={handleSubmit}>
                 { !success && 
                 <div className='mx-auto'>
@@ -159,7 +135,7 @@ const Contact = () => {
                         </h1>
                         <select
                         
-                            className='bg-[#f0f0f0] border w-96 px-4 mx-auto py-2'
+                            className='bg-[#f0f0f0] border w-full md:w-96 px-4 mx-auto py-2'
                             placeholder='Subject'
                             type="subject"
                             id="subject"
