@@ -167,7 +167,7 @@ const Contact = () => {
                         />
                     </div>
                     <div className='items-center'>
-                        <button className='bg-[#CD252B] px-10 tracking-wider py-2 md:mt-10 mt-5 text-white' type="submit">
+                        <button className='bg-secondary px-10 tracking-wider py-2 md:mt-10 mt-5 text-white' type="submit">
                             {loading ? 'Loading...' : 'Submit'}
                         </button>
                     </div>
