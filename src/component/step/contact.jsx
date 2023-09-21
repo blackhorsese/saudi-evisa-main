@@ -58,8 +58,8 @@ const Contact = () => {
             </h1>
         </div>
     </div>
-    <div className='overflow-x-hidden z-10 md:px-10 mx-auto px-5'>
-        <div className='fixed-section my-3 w-full bg-[#fff] font-semibold justify-between flex px-10 text-lg max-w-screen-2xl mx-auto text-[#6e6e6e]'>
+    <div className='md:px-10 mx-auto px-5'>
+        <div className='fixed-section my-3 w-full bg-[#fff] font-semibold justify-between flex px-10 text-lg max-w-screen-2xl mx-auto text-[#6e6e6e] border-b border-b-[#b1b1b1]'>
             <div className=''>
                 <h1>
                     Contact us
