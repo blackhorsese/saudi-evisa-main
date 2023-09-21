@@ -81,7 +81,6 @@ const Contact = () => {
                 </h1>
             </div>
         </div>
-        <div className='border-b border-b-[#b1b1b1]'/>
         <div className='max-w-screen-2xl mx-auto align-middle'>
             <div className='md:px-10 px-5 mx-auto pt-20'>
                 <h1 className='text-4xl font-semibold'>
