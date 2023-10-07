@@ -46,7 +46,7 @@ export default function Navbar({ color }) {
         </a>
         <div></div>
         <div className="self-center hidden lg:flex gap-10 justify-end">
-          <a href="/personal-info" 
+          <a href="/register" 
             className="text-sm items-center bg-black bg-opacity-25 px-5 rounded-full font-bold justify-center text-white py-2"
           >
             Apply for eVisa
