@@ -57,7 +57,7 @@ export default function Banner({ color }) {
 
         <div>
           <button
-            onClick={() => handleNavigate("/personal-info")}
+            onClick={() => handleNavigate("/register")}
             className="items-center justify-center border-4 text-secondary border-secondary rounded-full md:px-20 px-10 md:py-4 md:font-bold py-2 mx-auto ml-8 mt-8 md:mt-0 md:ml-0"
           >
             APPLY NOW
