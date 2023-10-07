@@ -7,7 +7,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const PerfonalInfo = () => {
+const Register = () => {
   const location = useLocation();
   const [step, setStep] = useState(1);
   const [error, setError] = useState('');
@@ -1453,4 +1453,4 @@ const PerfonalInfo = () => {
   );
 }
 
-export default PerfonalInfo;
+export default Register;
