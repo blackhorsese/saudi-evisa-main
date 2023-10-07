@@ -4,7 +4,7 @@ import Footer from "../footer";
 import Steppers from "../stepper";
 
 
-const Review = () => {
+const Application = () => {
   const [inputData, setInputData] = useState(null);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
@@ -335,4 +335,4 @@ const Review = () => {
   );
 }
 
-export default Review;
+export default Application;
